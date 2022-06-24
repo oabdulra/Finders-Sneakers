@@ -9,19 +9,6 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
   // display form to register
   router.get("/register", (req, res) => {
     res.render("register");
@@ -30,7 +17,7 @@ module.exports = (db) => {
   // create new user
   router.post("/register", (req, res) => {
     const user = req.body;
-    database.addUser(user)
+    db.addUser(user)
     .then(user => {
       if (!user) {
         res.send({error: "error"});
@@ -44,12 +31,12 @@ module.exports = (db) => {
 
   // display form to login
   router.get("/login", (req, res) => {
-    res.render("login");
+    res.render("login", {userID: req.session.user_id});
   });
 
   // check if user exists with given email
   const login =  function(email) {
-    return database.getUserWithEmail(email)
+    return db.getUserWithEmail(email)
     .then(user => {
       if (user.email) {
         return user;
@@ -72,7 +59,7 @@ module.exports = (db) => {
           return;
         }
         req.session.userId = user.id;
-        res.redirect("/sneakers");
+        res.redirect("/sneakers", {userID: req.session.user_id});
       })
       .catch(e => {
         res.send(e);
@@ -82,7 +69,7 @@ module.exports = (db) => {
   // logout of account
   router.post("/logout", (req, res) => {
     req.session.userId = null;
-    res.redirect("/sneakers");
+    res.redirect("/sneakers", {userID: req.session.user_id});
   });
 
   return router;
