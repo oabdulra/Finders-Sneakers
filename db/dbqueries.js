@@ -4,8 +4,23 @@ const dbParams = require("../lib/db");
 
 const getMyCollection = function(userId) {
 
+  const queryString = `
+  SELECT posted_ads.*
+  FROM posted_ads
+  WHERE owner_id = $1
+  `;
+
+  return db.query(queryString, userId)
+          .then((result) => {
+            return result.rows;
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
 
 };
+
+exports.getMyCollection = getMyCollection;
 
 const getUserWithId = function(userId) {
 
@@ -67,7 +82,17 @@ const deleteOneSneaker = function (sneakerAd) {
 
   const queryString = 'DELETE FROM posted_ads WHERE id = $1';
 
+  return db.query(queryString, sneakerAd)
+        .then((result) => {
+          result.redirect("/")
+        })
+        .catch((err) => {
+          console.log(err.message);
+        })
+
 };
+
+exports.deleteOneSneaker = deleteOneSneaker;
 
 
 /*
