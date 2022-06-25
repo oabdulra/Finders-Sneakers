@@ -9,7 +9,7 @@ module.exports = (db) => {
       res.render("register", {user: null});
     }
     const user = db.user;
-    res.render("register", {user: {id: user.id, email: user.email}});
+    res.render("register", {user: {id: user.id, email: user.email, name: user.name}});
   });
 
   // create new user
@@ -22,7 +22,7 @@ module.exports = (db) => {
           return;
         }
         req.session.user_id = user.id;
-        res.redirect("/sneakers", {user: {id: user.id, email: user.email}});
+        res.redirect("/sneakers", {user: {id: user.id, email: user.email, name: user.name}});
       })
       .catch(e => res.send(e));
   });
@@ -34,7 +34,7 @@ module.exports = (db) => {
       res.render("login", {user: null});
     }
     const user = db.user;
-    res.render("login", {user: {id: user.id, email: user.email}});
+    res.render("login", {user: {id: user.id, email: user.email, name: user.name}});
   });
 
   // check if user exists with given email
@@ -62,7 +62,7 @@ module.exports = (db) => {
           return;
         }
         req.session.user_id = user.id;
-        res.redirect("/sneakers", {user: {id: user.id, email: user.email}});
+        res.redirect("/sneakers", {user: {id: user.id, email: user.email, name: user.name}});
       })
       .catch(e => {
         res.send(e);
