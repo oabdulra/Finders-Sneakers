@@ -3,6 +3,7 @@
  - function getUserWithId(userId) ==> returns user object
  - function getOneSneaker(sneakerId) ==> returns sneaker object
  - function addOneSneaker(sneakerObject) ==> adds new sneaker to db
+ - function deleteOneSneaker() ==> deletes sneaker from db
  - function contactSeller(messageObject) ==> adds new message to db and use some api to send the message?
 */
 const express = require('express');
@@ -84,6 +85,19 @@ module.exports = (db) => {
     db.addNewSneaker({...req.body, owner_id: user_id})
       .then(sneaker => {
         res.redirect(`/${sneaker.id}`);
+      })
+      .catch(e => res.send(e));
+  });
+
+  // delete ad
+  router.post("/:id/delete", (req, res) => {
+    const user_id = req.session.user_id;
+    if (!user_id) {
+      res.send({error: "error"});
+    }
+    db.deleteOneSneaker(req.query)
+      .then(() => {
+        res.redirect("/");
       })
       .catch(e => res.send(e));
   });
