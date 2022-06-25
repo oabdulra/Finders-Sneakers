@@ -24,7 +24,7 @@ module.exports = (db) => {
         return;
       }
       req.session.userId = user.id;
-      res.redirect("/sneakers");
+      res.redirect("/sneakers", {userID: req.session.user_id});
     })
     .catch(e => res.send(e));
   });
