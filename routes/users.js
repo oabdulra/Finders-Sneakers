@@ -16,15 +16,15 @@ module.exports = (db) => {
   router.post("/register", (req, res) => {
     const user = req.body;
     db.addUser(user)
-    .then(user => {
-      if (!user) {
-        res.send({error: "error"});
-        return;
-      }
-      req.session.user_id = user.id;
-      res.redirect("/sneakers", {user: {id: user.id, email: user.email}});
-    })
-    .catch(e => res.send(e));
+      .then(user => {
+        if (!user) {
+          res.send({error: "error"});
+          return;
+        }
+        req.session.user_id = user.id;
+        res.redirect("/sneakers", {user: {id: user.id, email: user.email}});
+      })
+      .catch(e => res.send(e));
   });
 
   // display form to login
@@ -40,16 +40,16 @@ module.exports = (db) => {
   // check if user exists with given email
   const login =  function(email) {
     return db.getUserWithEmail(email)
-    .then(user => {
-      if (user.email) {
-        return user;
-      }
-      return null;
-    })
-    .catch(e => {
-      res.send(e);
-    });
-  }
+      .then(user => {
+        if (user.email) {
+          return user;
+        }
+        return null;
+      })
+      .catch(e => {
+        res.send(e);
+      });
+  };
   exports.login = login;
 
   // login to existing account
@@ -66,7 +66,7 @@ module.exports = (db) => {
       })
       .catch(e => {
         res.send(e);
-      })
+      });
   });
 
   // logout of account
