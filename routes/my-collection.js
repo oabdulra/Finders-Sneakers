@@ -1,20 +1,27 @@
+/* OSAMA: need these functions from db.js :
+ - function getMyCollection(userId) ==> returns array of sneaker objects
+ - function getUserWithId(userId) ==> returns user object
+*/
 const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
   // display user's own ads
   router.get("/", (req, res) => {
-    //ADD CODE
-  });
-
-  // delete user's own ad from my collections
-  router.post("/:id/delete", (req, res) => {
-    //ADD CODE
-  });
-
-  // delete user's own ad from my collections
-  router.post("/:id/delete", (req, res) => {
-    //ADD CODE
+    const user_id = req.session.user_id;
+    if (!user_id) {
+      res.error("error");
+      return;
+    }
+    db.getMyCollection(user_id)
+      .then(collection => {
+        db.getUserWithId(user_id)
+          .then(user => {
+            res.render("my_collection", {collection, user});
+          })
+          .catch(e => res.send(e));
+      })
+      .catch(e => res.send(e));
   });
 
   return router;
