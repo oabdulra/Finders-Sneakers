@@ -53,7 +53,19 @@ app.use("/mycollection", myCollectionRoutes(db));
 app.use("/myfavs", myFavsRoutes(db));
 
 app.get("/", (req, res) => {
-  res.render("index");
+  db.getMostFavourited(req.query)
+    .then(sneakers => {
+      const user_id = req.session.user_id;
+      if (!user_id) {
+        res.render("sneakers", {sneakers, user: null});
+      }
+      db.getUserWithId(user_id)
+        .then(user => {
+          res.render("index", {user, sneakers});
+        })
+        .catch(e => res.send(e));
+    })
+    .catch(e => res.send(e));
 });
 
 app.listen(PORT, () => {
