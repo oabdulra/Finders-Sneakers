@@ -57,9 +57,7 @@ module.exports = (db) => {
         }
         return null;
       })
-      .catch(e => {
-        res.send(e);
-      });
+      .catch(e => res.send(e));
   };
   exports.login = login;
 
@@ -75,9 +73,7 @@ module.exports = (db) => {
         req.session.user_id = user.id;
         res.redirect("/sneakers", {user});
       })
-      .catch(e => {
-        res.send(e);
-      });
+      .catch(e => res.send(e));
   });
 
   // logout of account
