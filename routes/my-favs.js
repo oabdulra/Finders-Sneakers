@@ -1,7 +1,7 @@
 /* OSAMA: need these functions from db.js :
  - function getMyFavs(userId) ==> returns array of sneaker objects
  - function getUserWithId(userId) ==> returns user object
- - function addToMyFavs(userId) ==> add new sneaker to favs db
+ - function addToMyFavs(sneakerObject) ==> add new sneaker to favs db
  - function deleteFromMyFavs(sneakerObject) ==> remove sneaker from favs db
 */
 const express = require('express');
@@ -42,7 +42,16 @@ module.exports = (db) => {
 
   // delete sneaker ad from favs collection
   router.post("/:id/delete", (req, res) => {
-    //ADD CODE
+    const user_id = req.session.user_id;
+    if (!user_id) {
+      res.error("error");
+      return;
+    }
+    db.deleteFromMyFavs(req.query)
+      .then(() => {
+        res.redirect("/");
+      })
+      .catch(e => res.send(e));
   });
 
   return router;
