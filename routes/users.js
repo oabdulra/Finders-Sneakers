@@ -14,10 +14,10 @@ module.exports = (db) => {
       res.render("register", {user: null});
     }
     db.getUserWithId(user_id)
-    .then(user => {
-      res.render("register", {user});
-    })
-    .catch(e => res.send(e));
+      .then(user => {
+        res.render("register", {user});
+      })
+      .catch(e => res.send(e));
   });
 
   // create new user
@@ -42,10 +42,10 @@ module.exports = (db) => {
       res.render("login", {user: null});
     }
     db.getUserWithId(user_id)
-    .then(user => {
-      res.render("login", {user});
-    })
-    .catch(e => res.send(e));
+      .then(user => {
+        res.render("login", {user});
+      })
+      .catch(e => res.send(e));
   });
 
   // check if user exists with given email
