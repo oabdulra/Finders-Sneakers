@@ -1,7 +1,7 @@
 /* OSAMA: need these functions from db.js :
  - function getAllSneakers(options - object containing filter info) ==> returns array of sneaker objects
  - function getUserWithId(userId) ==> returns user object
- - function getOneSneaker(email) ==> returns user object
+ - function getOneSneaker(sneakerId) ==> returns sneaker object
  - function addOneSneaker(sneakerObject) ==> adds new sneaker to db
  - function contactSeller(messageObject) ==> adds new message to db and use some api to send the message?
 */
