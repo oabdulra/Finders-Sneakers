@@ -4,7 +4,12 @@ const router  = express.Router();
 module.exports = (db) => {
   // display form to register
   router.get("/register", (req, res) => {
-    res.render("register");
+    const user_id = req.session.user_id;
+    if (!user_id) {
+      res.render("register", {user: null});
+    }
+    const user = db.user;
+    res.render("register", {user: {id: user.id, email: user.email}});
   });
 
   // create new user
@@ -16,15 +21,20 @@ module.exports = (db) => {
         res.send({error: "error"});
         return;
       }
-      req.session.userId = user.id;
-      res.redirect("/sneakers", {userID: req.session.user_id});
+      req.session.user_id = user.id;
+      res.redirect("/sneakers", {user: {id: user.id, email: user.email}});
     })
     .catch(e => res.send(e));
   });
 
   // display form to login
   router.get("/login", (req, res) => {
-    res.render("login", {userID: req.session.user_id});
+    const user_id = req.session.user_id;
+    if (!user_id) {
+      res.render("login", {user: null});
+    }
+    const user = db.user;
+    res.render("login", {user: {id: user.id, email: user.email}});
   });
 
   // check if user exists with given email
@@ -51,8 +61,8 @@ module.exports = (db) => {
           res.send({error: "error"});
           return;
         }
-        req.session.userId = user.id;
-        res.redirect("/sneakers", {userID: req.session.user_id});
+        req.session.user_id = user.id;
+        res.redirect("/sneakers", {user: {id: user.id, email: user.email}});
       })
       .catch(e => {
         res.send(e);
@@ -61,8 +71,8 @@ module.exports = (db) => {
 
   // logout of account
   router.post("/logout", (req, res) => {
-    req.session.userId = null;
-    res.redirect("/sneakers", {userID: req.session.user_id});
+    req.session.user_id = null;
+    res.redirect("/sneakers", {user: null});
   });
 
   return router;
