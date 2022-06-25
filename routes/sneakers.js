@@ -2,20 +2,18 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  // display info about app and team
-  router.get("/about", (req, res) => {
-    res.render("about", {userID: req.session.user_id});
-  });
+  // if have time, implement about page
 
   // display all sneaker ads
   router.get("/", (req, res) => {
     db.getAllSneakers(req.query)
-    .then(properties => {
-      const templateVars = {
-        properties: properties,
-        userID: req.session.user_id
+    .then(sneakers => {
+      const user_id = req.session.user_id;
+      if (!user_id) {
+        res.render("sneakers", {sneakers, user: null})
       }
-      res.render("sneakers", templateVars);
+      const user = db.user;
+      res.render("sneakers", {sneakers, user: {id: user.id, email: user.email}});
     })
     .catch(e => {
       console.error(e);
@@ -25,18 +23,15 @@ module.exports = (db) => {
 
   // display individual sneaker ad
   router.get("/:id", (req, res) => {
-    db.getAllSneakers(req.query)
-    .then(properties => {
-      const templateVars = {
-        properties: properties,
-        userID: req.session.user_id
+    db.getOneSneaker(req.query)
+    .then(sneaker => {
+      const user_id = req.session.user_id;
+      if (!user_id) {
+        res.render("sneakers_show", {sneaker, user: null});
       }
-      res.render("sneakers", templateVars);
+      const user = db.user;
+      res.render("sneakers_show", {sneaker, user: {id: user.id, email: user.email}});
     })
-    .catch(e => {
-      console.error(e);
-      res.send(e);
-    });
   });
 
   // display form to contact seller
