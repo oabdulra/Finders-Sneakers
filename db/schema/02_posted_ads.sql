@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS posted_ads CASCADE;
 
 CREATE TABLE posted_ads (
   id SERIAL PRIMARY KEY NOT NULL,
-  owner_id INTEGER REFERENCES users(id) NOT NULL,
+  owner_id BIGINT REFERENCES users(id) NOT NULL,
 
   title VARCHAR(255) NOT NULL,
   ad_photo VARCHAR(255) NOT NULL,
