@@ -1,3 +1,8 @@
+/* OSAMA: need these functions from db.js :
+ - function getUserWithId(userId) ==> returns user object
+ - function getUserWithEmail(email) ==> returns user object
+ - function addUser(userObject) ==> adds new user to db
+*/
 const express = require('express');
 const router  = express.Router();
 
@@ -8,8 +13,11 @@ module.exports = (db) => {
     if (!user_id) {
       res.render("register", {user: null});
     }
-    const user = db.user;
-    res.render("register", {user: {id: user.id, email: user.email, name: user.name}});
+    db.getUserWithId(user_id)
+    .then(user => {
+      res.render("register", {user});
+    })
+    .catch(e => res.send(e));
   });
 
   // create new user
@@ -22,7 +30,7 @@ module.exports = (db) => {
           return;
         }
         req.session.user_id = user.id;
-        res.redirect("/sneakers", {user: {id: user.id, email: user.email, name: user.name}});
+        res.redirect("/sneakers", {user});
       })
       .catch(e => res.send(e));
   });
@@ -33,8 +41,11 @@ module.exports = (db) => {
     if (!user_id) {
       res.render("login", {user: null});
     }
-    const user = db.user;
-    res.render("login", {user: {id: user.id, email: user.email, name: user.name}});
+    db.getUserWithId(user_id)
+    .then(user => {
+      res.render("login", {user});
+    })
+    .catch(e => res.send(e));
   });
 
   // check if user exists with given email
@@ -62,7 +73,7 @@ module.exports = (db) => {
           return;
         }
         req.session.user_id = user.id;
-        res.redirect("/sneakers", {user: {id: user.id, email: user.email, name: user.name}});
+        res.redirect("/sneakers", {user});
       })
       .catch(e => {
         res.send(e);
