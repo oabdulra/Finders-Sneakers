@@ -53,7 +53,7 @@ app.use("/mycollection", myCollectionRoutes(db));
 app.use("/myfavs", myFavsRoutes(db));
 
 app.get("/", (req, res) => {
-  db.getMostFavourited(req.query)
+  db.getMostFavourited(limit = 5)
     .then(sneakers => {
       const user_id = req.session.user_id;
       if (!user_id) {
