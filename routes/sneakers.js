@@ -3,8 +3,9 @@
  - function getUserWithId(userId) ==> returns user object
  - function getOneSneaker(sneakerId) ==> returns sneaker object
  - function addNewSneaker(sneakerObject) ==> adds new sneaker to db
- - function deleteOneSneaker() ==> deletes sneaker from db
+ - function deleteOneSneaker(sneakerObject) ==> deletes sneaker from db
  - function contactSeller(messageObject) ==> adds new message to db and use some api to send the message?
+ - function getMostFavourited() ==> returns array of most favorited items (maybe 5?), route can be found in server.js file since it's the home page but left note here to be easily seen
 */
 const express = require('express');
 const router  = express.Router();
