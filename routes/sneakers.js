@@ -51,12 +51,12 @@ module.exports = (db) => {
 
   // create new ad
   router.post("/", (req, res) => {
-
+    //ADD CODE
   });
 
   // contact seller associated with sneaker ad
   router.post("/:id", (req, res) => {
-
+    //ADD CODE
   });
 
   return router;
