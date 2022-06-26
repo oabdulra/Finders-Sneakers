@@ -7,7 +7,11 @@ const getMyCollection = function(userId) {
   const queryString = `
   SELECT posted_ads.*
   FROM posted_ads
+  JOIN shoe_size ON posted_ads.size_id = shoe_size.id
+  JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
   WHERE owner_id = $1
+  GROUP BY posted_ads.id
+  ORDER BY posted_ads.post_date;
   `;
 
   return db.query(queryString, [userId])
@@ -41,6 +45,19 @@ const getUserWithId = function(userId) {
 };
 
 exports.getUserWithId = getUserWithId;
+
+const getAllSneakers = function(options) {
+
+  const queryParams = [];
+
+  let queryString = `
+  SELECT posted_ads.*
+  FROM posted_ads
+  JOIN shoe_size ON posted_ads.size_id = shoe_size.id
+  JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id;`;
+}
+
+exports.getAllSneakers = getAllSneakers;
 
 const getOneSneaker = function(sneakerId) {
 
@@ -80,7 +97,7 @@ exports.addOneSneaker = addOneSneaker;
 
 const deleteOneSneaker = function (sneakerAd) {
 
-  const queryString = 'DELETE FROM posted_ads WHERE id = $1';
+  const queryString = `DELETE FROM posted_ads WHERE id = $1`;
 
   return db.query(queryString, sneakerAd)
         .then((result) => {
