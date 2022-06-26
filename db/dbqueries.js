@@ -1,6 +1,17 @@
 const { resolveInclude } = require("ejs");
 const dbParams = require("../lib/db");
 
+//helper function to determine the type of operator needed
+const queryOp = (queryParams) => {
+  let queryString = ` `;
+  if (queryParams.length > 1) {
+    queryString += `AND `;
+  } else {
+    queryString += `WHERE `;
+  }
+  return queryString;
+}
+
 
 const getMyCollection = function(userId) {
 
@@ -55,6 +66,27 @@ const getAllSneakers = function(options) {
   FROM posted_ads
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
   JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id;`;
+
+  if (options.minimum_price_per_night) {
+    queryParams.push(`${options.minimum_price}`);
+    queryString += `${queryOp(queryParams)} price >=  $${queryParams.length}`;
+  }
+
+  if (options.maximum_price_per_night) {
+    queryParams.push(`${options.maximum_price * 100}`);
+    queryString += `${queryOp(queryParams)} price <=  $${queryParams.length}`;
+  }
+
+  queryString += `
+  GROUP BY posted_ads.id
+  ORDER BY price;`;
+
+  return db.query(queryString, queryParams)
+  .then((result) =>
+      result.rows )
+  .catch((err) => {
+    console.log(err.message);
+  });
 }
 
 exports.getAllSneakers = getAllSneakers;
