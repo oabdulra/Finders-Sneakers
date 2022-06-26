@@ -14,8 +14,9 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
 
-  <!-- <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" /> -->
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/login.css" type="text/css" />
 
   <!-- JavaScript Scripts -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -23,12 +24,21 @@
 </head>
 
 <body>
-
   <%- include('partials/_header') %>
-
-  <main>
-    LOGIN
-  </main>
+  <div class="log-res">
+    <header>
+      <h3>Log In</h3>
+    </header>
+    <main>
+      <p>Don't have an account? <a href="/register">Register</a></p>
+      <form>
+        <label>Username</label>
+        <input class="form-control" type="text" name="" placeholder="Enter email">
+        <label></label>
+      </form>
+      <button type="submit" class="btn btn-outline-primary">Submit</button>
+    </main>
+  </div>
 </body>
 
 </html>
