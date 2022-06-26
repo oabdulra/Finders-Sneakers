@@ -93,7 +93,21 @@ exports.getAllSneakers = getAllSneakers;
 
 const getOneSneaker = function(sneakerId) {
 
+  const queryString = `SELECT * FROM posted_ads WHERE id = $1`;
+
+  return db.query(queryString, [sneakerId])
+          .then((result) => {
+            if (result.rows) {
+              return result.rows[0];
+            } else {
+              return null;
+            }
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
 };
+exports.getOneSneaker = getOneSneaker;
 
 const addOneSneaker = function (sneakerObject) {
 
