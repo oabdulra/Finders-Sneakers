@@ -10,7 +10,7 @@ const getMyCollection = function(userId) {
   WHERE owner_id = $1
   `;
 
-  return db.query(queryString, userId)
+  return db.query(queryString, [userId])
           .then((result) => {
             return result.rows;
           })
