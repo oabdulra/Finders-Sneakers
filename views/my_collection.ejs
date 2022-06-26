@@ -15,6 +15,7 @@
 
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/my-collection.css" type="text/css" />
 
   <!-- JavaScript Scripts -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -25,22 +26,18 @@
 <body>
   <%- include('partials/_header') %>
 
-  <main>
+  <main class="mc-main">
+    <header class="mc-ad-price-size">
+      <h6>Ad Title || </h6>
+      <h6>Price || </h6>
+      <h6>Size</h6>
+    </header>
     <section>
-      <div>
-        <div>
-          <h6>Ad Title</h6>
-          <h6>Price</h6>
-          <h6>Size</h6>
-        </div>
-        <div>
-          <img src="https://www.pexels.com/photo/blue-and-white-air-jordan-1-on-gray-wood-log-at-daytime-1070360/" alt="Sneaker">
-          <p>Sneaker description here</p>
-          <button>Edit</button>
-          <button>Delete</button>
-          <button>Mark as Sold</button>
-        </div>
-      </div>
+      <img src="https://www.pexels.com/photo/blue-and-white-air-jordan-1-on-gray-wood-log-at-daytime-1070360/" alt="Sneaker">
+      <p>Sneaker description here</p>
+      <button type="submit" class="btn btn-outline-primary">Edit</button>
+      <button type="submit" class="btn btn-outline-primary">Delete</button>
+      <button type="submit" class="btn btn-outline-primary">Mark as Sold</button>
     </section>
   </main>
 </body>
