@@ -15,6 +15,7 @@
 
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/my-favourites.css" type="text/css" />
 
   <!-- JavaScript Scripts -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -25,26 +26,44 @@
 
   <%- include('partials/_header') %>
 
-   <main>
-    <section class="fave-items">
-      <% for (let ad of favourite_ads) { %>
-        <% if (users.id === favourite_ads.user_id) { %>
-          <header class="ad-info">
-            <h6><%= ad.title %></h6>
-            <h6><%= ad.shoe_id %></h6>
-            <h6><%= ad.price %></h6>
-          </header>
-          <section class="ad-pic-text">
-            <img src='<%= ad.ad_photo %>'>
-            <p><%= ad.ad_description %></p>
-          </section>
-          <footer class="browse-footer">
-            <p><%= ad.post_date %></p>
-            <button type="submit" class="btn btn-outline-primary"></button>
-            <button type="submit" class="btn btn-outline-primary"></button>
-          </footer>
-        } %>
-    </section>
-    </main>
+  <div class="myfavs-heading">
+    <h1>My Favourites</h1>
+  </div>
+
+  <main class="myfavs-main">
+    <article class="myfavs-article">
+      <header class="myfavs-ad-info">
+        <h6>Ad Title</h6>
+        <h6>Size</h6>
+        <h6>Price</h6>
+      </header>
+      <section class="myfavs-ad-content">
+        <img src="https://images.unsplash.com/photo-1542219550-37153d387c27?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" width="200" height="200">
+        <p class="myfavs-ad-desc">Hexagon drinking vinegar flexitarian vinyl VHS. Biodiesel vinyl pitchfork chicharrones literally squid pabst meggings kickstarter. Schlitz subway tile blue bottle butcher deep v. Cloud bread lo-fi mustache sartorial shabby chic cold-pressed shaman craft beer. Semiotics meggings brunch keytar gastropub banh mi flexitarian art party pinterest.</p>
+      </section>
+      <footer class="myfavs-footer">
+        <button type="submit" class="btn btn-outline-primary myfavs-btns">Contact Seller</button>
+        <button type="submit" class="btn btn-outline-primary myfavs-btns">Remove from Favourites</button>
+      </footer>
+    </article>
+
+    <article class="myfavs-article">
+      <header class="myfavs-ad-info">
+        <h6>Ad Title</h6>
+        <h6>Size</h6>
+        <h6>Price</h6>
+      </header>
+      <section class="myfavs-ad-content">
+        <img src="https://images.unsplash.com/photo-1542219550-37153d387c27?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" width="200" height="200">
+        <p class="myfavs-ad-desc">Hexagon drinking vinegar flexitarian vinyl VHS. Biodiesel vinyl pitchfork chicharrones literally squid pabst meggings kickstarter. Schlitz subway tile blue bottle butcher deep v. Cloud bread lo-fi mustache sartorial shabby chic cold-pressed shaman craft beer. Semiotics meggings brunch keytar gastropub banh mi flexitarian art party pinterest.</p>
+      </section>
+      <footer class="myfavs-footer">
+        <button type="submit" class="btn btn-outline-primary myfavs-btns">Contact Seller</button>
+        <button type="submit" class="btn btn-outline-primary myfavs-btns">Remove from Favourites</button>
+      </footer>
+    </article>
+
+  </main>
+
 </body>
 </html>
