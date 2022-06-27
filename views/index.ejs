@@ -16,6 +16,7 @@
 
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/index.css" type="text/css" />
 
   <!-- JavaScript Scripts -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -26,16 +27,47 @@
 
   <%- include('partials/_header') %>
 
-  <main>
-    <!-- If user NOT logged in, show this: -->
+  <div class="index-heading">
     <h1>Welcome!</h1>
-    <h3>Find your next sneaker.</h3>
-    <button>Log In</button>
-    <button>Sign Up</button>
+    <h3>Most Favourited Sneakers</h3>
+  </div>
 
-    <!-- If user IS logged in, show this: -->
-    <h1>Find your next sneaker</h1>
-    <button>Browse</button>
+  <main class="index-main-container">
+    <article class="index-article">
+      <header class="index-ad-info">
+        <p class="index-ad-title">Ad Title</p>
+        <p>Price</p>
+      </header>
+      <section class="index-ad-content">
+        <img src="https://images.unsplash.com/photo-1607522370275-f14206abe5d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1121&q=80" alt="Red Converse sneaker" width="200" height="200">
+
+        <p class="index-ad-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu scelerisque tortor. Mauris eleifend vestibulum pellentesque. Phasellus consectetur porttitor turpis, ut suscipit leo pharetra et.</p>
+      </section>
+    </article>
+
+    <article class="index-article">
+      <header class="index-ad-info">
+        <p class="index-ad-title">Ad Title</p>
+        <p>Price</p>
+      </header>
+      <section class="index-ad-content">
+        <img src="https://images.unsplash.com/photo-1607522370275-f14206abe5d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1121&q=80" alt="Red Converse sneaker" width="200" height="200">
+
+        <p class="index-ad-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu scelerisque tortor. Mauris eleifend vestibulum pellentesque. Phasellus consectetur porttitor turpis, ut suscipit leo pharetra et.</p>
+      </section>
+    </article>
+
+    <article class="index-article">
+      <header class="index-ad-info">
+        <p class="index-ad-title">Ad Title</p>
+        <p>Price</p>
+      </header>
+      <section class="index-ad-content">
+        <img src="https://images.unsplash.com/photo-1607522370275-f14206abe5d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1121&q=80" alt="Red Converse sneaker" width="200" height="200">
+
+        <p class="index-ad-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu scelerisque tortor. Mauris eleifend vestibulum pellentesque. Phasellus consectetur porttitor turpis, ut suscipit leo pharetra et.</p>
+      </section>
+  </article>
   </main>
 </body>
 
