@@ -12,26 +12,45 @@
 }
 
 .browse-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  border: 1px solid #000000;
   width: 70%;
   margin: 0 auto;
 }
 
-.ad-info {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+.browse-article {
+  padding-bottom: 5px;
+  border: 1px solid #000000;
 }
 
-.ad-pic-text {
+.browse-ad-info {
   display: flex;
+  flex-direction: row;
+}
+
+.browse-ad-info > h6 {
+  padding-right: 15px;
+}
+
+.browse-ad-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.browse-ad-desc {
+  padding-left: 10px;
 }
 
 .browse-footer {
   display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.browse-footer > p {
+  padding-right: 10px;
+}
+
+.browse-footer-btns {
+  margin-right: 10px;
 }
