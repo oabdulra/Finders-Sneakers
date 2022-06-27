@@ -15,12 +15,11 @@
 
 .index-ad-info {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
 }
 
-.index-ad-title {
-  padding-right: 30px;
+.index-ad-info > h6 {
+  padding-right: 15px;
 }
 
 .index-ad-content {
