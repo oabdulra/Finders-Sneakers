@@ -25,23 +25,26 @@
 
   <%- include('partials/_header') %>
 
-  <main>
-    <section>
-      <h5>My Favourited Sneakers</h5>
-      <div>
-        <h6>Ad Title</h6>
-        <h6>Ad Price</h6>
-      </div>
-      <div>
-        <div>
-          <img>
-        </div>
-        <div>
-
-        </div>
-      </div>
+   <main>
+    <section class="fave-items">
+      <% for (let ad of favourite_ads) { %>
+        <% if (users.id === favourite_ads.user_id) { %>
+          <header class="ad-info">
+            <h6><%= ad.title %></h6>
+            <h6><%= ad.shoe_id %></h6>
+            <h6><%= ad.price %></h6>
+          </header>
+          <section class="ad-pic-text">
+            <img src='<%= ad.ad_photo %>'>
+            <p><%= ad.ad_description %></p>
+          </section>
+          <footer class="browse-footer">
+            <p><%= ad.post_date %></p>
+            <button type="submit" class="btn btn-outline-primary"></button>
+            <button type="submit" class="btn btn-outline-primary"></button>
+          </footer>
+        } %>
     </section>
-
-  </main>
+    </main>
 </body>
 </html>
