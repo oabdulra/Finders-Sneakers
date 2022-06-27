@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FindersSneakers</title>
 
-
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
@@ -32,16 +31,13 @@
   </div>
 
   <main class="sell-main">
-    <section class="post-ad">
-      <form method="POST" action="/">
-        <div>
-          <textarea placeholder="Title"></textarea>
-          <textarea placeholder="Price"></textarea>
-          <textarea placeholder="Size"></textarea>
-        </div>
-        <textarea placeholder="Description"></textarea>
-        <textarea placeholder="Photo URL https://"></textarea>
-        <select placeholder="Shoe Size">
+    <form method="POST" action="/" class="sell-form">
+      <div class="create-post-info">
+        <label for="title">Title:</label>
+        <input type="text" name="title" placeholder="Title">
+      </br>
+        <label for="size">Size:</label>
+        <select name="size" placeholder="Shoe Size">
           <option value = "1">Size 1</option>
           <option value = "2">Size 2</option>
           <option value = "3">Size 3</option>
@@ -58,18 +54,27 @@
           <option value = "14">Size 14</option>
           <option value = "15">Size 15</option>
         </select>
-        <select placeholder="Shoe Brand">
+        <label for="brand">Brand:</label>
+        <select name="brand" placeholder="Shoe Brand">
           <option value = "1">Jordan</option>
           <option value = "2">Nike</option>
           <option value = "3">Adidas</option>
           <option value = "4">Reebok</option>
           <option value = "5">Skechers</option>
         </select>
-
-        <input type="submit">
-      </form>
-    </section>
+        <label for="price">Price:</label>
+        <input type="text" name="price" placeholder="Price" size="4">
+      </div>
+        <label for="description">Description</label>
+        </br>
+        <textarea placeholder="Description"></textarea>
+        </br>
+        <label for="photo">Photo</label>
+        </br>
+        <input type="text" name="photo" placeholder=" https://" size="40">
+        </br>
+        <input type="submit" class="btn btn-outline-primary create-post-btn">
+    </form>
   </main>
 </body>
-
 </html>
