@@ -31,12 +31,11 @@
     </header>
     <main>
       <p>Don't have an account? <a href="/register">Register</a></p>
-      <form>
+      <form action="login" method="POST">
         <label>Username</label>
-        <input class="form-control" type="text" name="" placeholder="Enter email">
-        <label></label>
+        <input class="form-control" type="text" name="email" placeholder="Enter email">
+        <button type="submit" class="btn btn-outline-primary login-form-btn">Submit</button>
       </form>
-      <button type="submit" class="btn btn-outline-primary">Submit</button>
     </main>
   </div>
 </body>
