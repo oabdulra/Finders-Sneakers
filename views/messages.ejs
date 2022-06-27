@@ -15,6 +15,7 @@
 
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/messages.css" type="text/css" />
 
   <!-- JavaScript Scripts -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -24,17 +25,41 @@
 <body>
   <%- include('partials/_header') %>
 
-  <h1>My Messages</h1>
+  <div class="messages-heading">
+    <h1>My Messages</h1>
+  </div>
 
   <main class="messages-main-container">
-    <article>
-      <header>
+    <article class="messages-article">
+      <header class="message-info">
         <h6>Ad Title</h6>
         <h6>Price</h6>
-        <h6>User name</h6>
+        <h6>From: User name</h6>
       </header>
       <section>
         <p>Hey! I'm interested in these sneakers. Please text or email me. sneakerfan@gmail.com  123-1029-2918  Thanks! -Jericho</p>
+      </section>
+    </article>
+
+    <article class="messages-article">
+      <header class="message-info">
+        <h6>Ad Title</h6>
+        <h6>Price</h6>
+        <h6>From: User name</h6>
+      </header>
+      <section>
+        <p>Hi. I'm interested. Here's my contact info: jordanfan@somemail.com  119-2129-2918. Name's Smith. Thanks.</p>
+      </section>
+    </article>
+
+    <article class="messages-article">
+      <header class="message-info">
+        <h6>Ad Title</h6>
+        <h6>Price</h6>
+        <h6>From: User name</h6>
+      </header>
+      <section>
+        <p>Hi there. I'm interested in these shoes. Are you willing to negotiate on the price? Text me: 281-219-1283  -Anita</p>
       </section>
     </article>
   </main>
