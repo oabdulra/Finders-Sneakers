@@ -4,6 +4,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <!-- If user logged in, show this: -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link" href="/browse">Browse</a>
@@ -13,12 +14,14 @@
         <a class="nav-item nav-link" href="/favourites">Favourites</a>
       </div>
     </div>
-    <!-- <div>
+    <div>
       <form method="POST" action="/logout" style="display: flex">
       <h5 style="margin-right: 10px; margin-top: 6px">Logged In As: </h5>
       <button type="submit" class="btn btn-outline-dark">Logout</button>
       </form>
-    </div> -->
+    </div>
+
+    <!-- If user logged out, show this: -->
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="/register">Register</a>
       <a class="nav-item nav-link" href="/login">Login</a>
