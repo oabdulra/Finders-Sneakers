@@ -1,11 +1,17 @@
+.browse-heading {
+  text-align: center;
+  margin-top: 21px;
+  padding-bottom: 15px;
+}
+
 .browse-main {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 
-  border: 5px solid blue;
-  width: 90%;
+  border: 1px solid #000000;
+  width: 70%;
   margin: 0 auto;
 }
 
