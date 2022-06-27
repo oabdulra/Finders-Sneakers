@@ -1,0 +1,20 @@
+.browse-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ad-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.ad-pic-text {
+  display: flex;
+}
+
+.browse-footer {
+  display: flex;
+}
