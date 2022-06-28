@@ -15,9 +15,12 @@ module.exports = (db) => {
 
   // display all sneaker ads
   router.get("/", (req, res) => {
+    console.log(req.session)
     db.getAllSneakers(req.query)
       .then(sneakers => {
         const user_id = req.session.user_id;
+        // delete consolelog after******
+        console.log(sneakers)
         if (!user_id) {
           res.render("sneakers", {sneakers, user: null});
         }
@@ -32,7 +35,8 @@ module.exports = (db) => {
 
   // display individual sneaker ad
   router.get("/:id", (req, res) => {
-    db.getOneSneaker(req.query)
+    const sneakerId = req.params.id;
+    db.getOneSneaker(sneakerId)
       .then(sneaker => {
         const user_id = req.session.user_id;
         if (!user_id) {
@@ -49,7 +53,8 @@ module.exports = (db) => {
 
   // display form to contact seller
   router.get("/:id/contact", (req, res) => {
-    db.getOneSneaker(req.query)
+    const sneakerId = req.params.id;
+    db.getOneSneaker(sneakerId)
       .then(sneaker => {
         const user_id = req.session.user_id;
         if (!user_id) {
