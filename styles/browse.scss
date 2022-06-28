@@ -7,6 +7,32 @@
   margin-bottom: 20px;
 }
 
+.browse-form {
+  margin-top: 20px;
+}
+
+.fa-solid {
+  padding-left: 10px;
+  padding-right: 50px;
+  animation-name: downarrow;
+  animation: downarrow 1s ease-in-out infinite;
+}
+
+@keyframes downarrow {
+  0%,
+  100% {
+    transform: translate(0px, 10px);
+  }
+
+  50% {
+    transform: translate(0, 0);
+  }
+}
+
+.fa-solid:hover {
+  cursor: pointer;
+}
+
 .filter-input {
   margin-right: 10px;
 }
