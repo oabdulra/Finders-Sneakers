@@ -18,6 +18,31 @@ const queryOp = (queryParams) => {
   return queryString;
 }
 
+const addUser = function(user) {
+
+  const queryString = `
+  INSERT INTO users (name, email)
+  VALUES ($1, $2)
+  RETURNING *`;
+
+  const queryParams = [
+    user.name,
+    user.email
+  ];
+
+   //returns query as a final step
+   return db.query(queryString, queryParams)
+   .then((result) => {
+    console.log(result.rows[0])
+      return result.rows[0];
+   })
+   .catch((err) => {
+     console.log(err.message);
+   });
+
+};
+
+exports.addUser = addUser;
 
 const getMyCollection = function(userId) {
 
