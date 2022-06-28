@@ -1,0 +1,43 @@
+.showsneaker-heading {
+  text-align: center;
+}
+
+.showsneaker-main {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.showsneaker-article {
+  padding: 5px;
+  border: 1px solid #000000;
+}
+
+.showsneaker-ad-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.showsneaker-ad-info > h6 {
+  padding-right: 15px;
+}
+
+.showsneaker-ad-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showsneaker-ad-desc {
+  padding-left: 10px;
+}
+
+.showsneaker-footer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.showsneaker-btns {
+  margin-right: 10px;
+}
