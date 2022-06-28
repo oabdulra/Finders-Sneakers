@@ -1,9 +1,8 @@
 const { resolveInclude } = require("ejs");
-const dbParams = require("../lib/db");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
-const dbParams = require("./lib/db.js");
+const dbParams = require("../lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
 
