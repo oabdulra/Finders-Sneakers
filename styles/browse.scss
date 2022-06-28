@@ -1,0 +1,82 @@
+.browse-heading {
+  text-align: center;
+}
+
+.filter {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.browse-form {
+  margin-top: 20px;
+}
+
+.fa-solid {
+  padding-left: 10px;
+  padding-right: 50px;
+  animation-name: downarrow;
+  animation: downarrow 1s ease-in-out infinite;
+}
+
+@keyframes downarrow {
+  0%,
+  100% {
+    transform: translate(0px, 10px);
+  }
+
+  50% {
+    transform: translate(0, 0);
+  }
+}
+
+.fa-solid:hover {
+  cursor: pointer;
+}
+
+.filter-input {
+  margin-right: 10px;
+}
+
+.browse-main {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.browse-article {
+  padding-bottom: 5px;
+  border: 1px solid #000000;
+}
+
+.browse-ad-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.browse-ad-info > h6 {
+  padding-right: 15px;
+}
+
+.browse-ad-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.browse-ad-desc {
+  padding-left: 10px;
+}
+
+.browse-footer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.browse-footer > p {
+  padding-right: 10px;
+}
+
+.browse-btns {
+  margin-right: 10px;
+}

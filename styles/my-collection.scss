@@ -1,0 +1,41 @@
+.mycoll-heading {
+  text-align: center;
+}
+
+.mycoll-main {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.mycoll-article {
+  padding-bottom: 15px;
+  border: 1px solid #000000;
+}
+
+.mycoll-ad-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.mycoll-ad-info > h6 {
+  padding-right: 15px;
+}
+
+.mycoll-ad-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mycoll-ad-desc {
+  padding-left: 10px;
+}
+
+.mycoll-footer {
+  margin-left: 5px;
+  margin-top: 15px;
+}
+
+.mycoll-footer-btns {
+  margin-right: 10px;
+}

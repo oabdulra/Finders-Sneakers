@@ -1,0 +1,33 @@
+.index-heading {
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.index-main-container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.index-article {
+  padding-bottom: 20px;
+  border: 1px solid #000000;
+}
+
+.index-ad-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.index-ad-info > h6 {
+  padding-right: 15px;
+}
+
+.index-ad-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.index-ad-desc {
+  padding-left: 10px;
+}

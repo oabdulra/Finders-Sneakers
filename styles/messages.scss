@@ -1,0 +1,21 @@
+.messages-heading {
+  text-align: center;
+}
+
+.messages-main-container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.messages-article {
+  border: 1px solid #000000;
+}
+
+.message-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.message-info > h6 {
+  padding-right: 15px;
+}

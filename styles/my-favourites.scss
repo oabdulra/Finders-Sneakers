@@ -1,0 +1,41 @@
+.myfavs-heading {
+  text-align: center;
+}
+
+.myfavs-main {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.myfavs-article {
+  padding-bottom: 15px;
+  border: 1px solid #000000;
+}
+
+.myfavs-ad-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.myfavs-ad-info > h6 {
+  padding-right: 15px;
+}
+
+.myfavs-ad-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.myfavs-ad-desc {
+  padding-left: 10px;
+}
+
+.myfavs-footer {
+  margin-left: 5px;
+  margin-top: 15px;
+}
+
+.myfavs-btns {
+  margin-right: 10px;
+}
