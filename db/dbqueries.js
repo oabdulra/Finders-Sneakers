@@ -1,6 +1,9 @@
 const { resolveInclude } = require("ejs");
 const dbParams = require("../lib/db");
 
+
+
+
 //helper function to determine the type of operator needed
 const queryOp = (queryParams) => {
   let queryString = ` `;
@@ -184,14 +187,51 @@ exports.getMyFaves = getMyFaves;
 
 const addToMyFaves = function (sneakerObject) {
 
-
-
+  const queryString = `
+    INSERT INTO favourite_ads (user_id, item_id)
+    VALUES
+  `
 };
 
 exports.addToMyFaves = addToMyFaves;
 
+const getMostFavourited = function () {
 
-/*
+  const queryString = `
+  SELECT favourite_ads.id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold,shoe_size.size, shoe_size.gender, shoe_brands.brand_name
+  FROM favourite_ads
+  JOIN posted_ads ON favourite_ads.item_id = posted_ads.id
+  JOIN shoe_size ON posted_ads.size_id = shoe_size.id
+  JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
+  GROUP BY favourite_ads.id, posted_ads.id , shoe_size.id, shoe_brands.id
+  ORDER BY COUNT(favourite_ads.item_id) DESC
+  LIMIT 5;
+  `;
+
+  return db.query(queryString)
+  .then((result) =>
+      result.rows )
+  .catch((err) => {
+    console.log(err.message);
+  });
+
+
+
+};
+
+exports.getMostFavourited = getMostFavourited;
+
+const deleteFromMyFavs= function (sneakerObject) {
+
+
+
+};
+
+exports.deleteFromMyFavs = deleteFromMyFavs;
+
+
+
+/* stretch goal
 const contactSeller = function (messageObject) {
 
 };
