@@ -10,11 +10,7 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 
-// PG database client/connection setup
-// const { Pool } = require("pg");
-// const dbParams = require("./lib/db.js");
-// const db = new Pool(dbParams);
-// db.connect();
+// PG database
 const db = require("./db/dbqueries");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -23,7 +19,11 @@ const db = require("./db/dbqueries");
 app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
+app.use(cookieSession({
+  name: "session",
+  keys: ["key 1"]
+}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   "/styles",
@@ -35,11 +35,6 @@ app.use(
 );
 
 app.use(express.static("public"));
-
-app.use(cookieSession({
-  name: "session",
-  keys: ["key 1", "key 2"]
-}));
 
 // Separated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -67,7 +62,6 @@ app.get("/", (req, res) => {
         .catch(e => res.send(e));
     })
     .catch(e => res.send(e));
-  res.send("ok")
 });
 
 app.listen(PORT, () => {

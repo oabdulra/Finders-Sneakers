@@ -1,8 +1,3 @@
-/* OSAMA: need these functions from db.js :
- - function getUserWithId(userId) ==> returns user object
- - function getUserWithEmail(email) ==> returns user object
- - function addUser(userObject) ==> adds new user to db
-*/
 const express = require('express');
 const router  = express.Router();
 
@@ -24,13 +19,13 @@ module.exports = (db) => {
   router.post("/register", (req, res) => {
     const user = req.body;
     db.addUser(user)
-      .then(user => {
+      .then((user) => {
         if (!user) {
           res.send({error: "error"});
           return;
         }
         req.session.user_id = user.id;
-        res.redirect("/sneakers", {user});
+        res.redirect("/sneakers");
       })
       .catch(e => res.send(e));
   });
@@ -71,7 +66,7 @@ module.exports = (db) => {
           return;
         }
         req.session.user_id = user.id;
-        res.redirect("/sneakers", {user});
+        res.redirect("/sneakers");
       })
       .catch(e => res.send(e));
   });
@@ -79,7 +74,7 @@ module.exports = (db) => {
   // logout of account
   router.post("/logout", (req, res) => {
     req.session.user_id = null;
-    res.redirect("/sneakers", {user: null});
+    res.redirect("/");
   });
 
   return router;

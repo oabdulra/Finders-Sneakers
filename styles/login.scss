@@ -1,0 +1,20 @@
+.log-res {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 100px;
+}
+
+p {
+  font-size: smaller;
+}
+
+input {
+  margin-top: 10px;
+}
+
+.login-form-btn {
+  margin-top: 10px;
+}

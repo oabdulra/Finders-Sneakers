@@ -1,0 +1,21 @@
+.contact-heading {
+  text-align: center;
+}
+
+.contact-main {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.contact-article {
+  border: 1px solid #000000;
+}
+
+.contact-ad-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.contact-ad-info > h6 {
+  padding-right: 15px;
+}

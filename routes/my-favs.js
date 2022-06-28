@@ -1,9 +1,3 @@
-/* OSAMA: need these functions from db.js :
- - function getMyFavs(userId) ==> returns array of sneaker objects
- - function getUserWithId(userId) ==> returns user object
- - function addToMyFavs(sneakerObject) ==> add new sneaker to favs db
- - function deleteFromMyFavs(sneakerObject) ==> remove sneaker from favs db
-*/
 const express = require('express');
 const router  = express.Router();
 
@@ -27,29 +21,31 @@ module.exports = (db) => {
   });
 
   // add sneaker ad to favs collection
-  router.post("/", (req, res) => {
+  router.post("/:id", (req, res) => {
     const user_id = req.session.user_id;
+    const sneakerId = req.params.id;
     if (!user_id) {
       res.error("error");
       return;
     }
-    db.addToMyFavs({...req.body, owner_id: user_id})
+    db.addToMyFavs(sneakerId, user_id)
       .then(() => {
-        res.redirect("/");
+        res.redirect("/myfavs");
       })
       .catch(e => res.send(e));
   });
 
   // delete sneaker ad from favs collection
   router.post("/:id/delete", (req, res) => {
+    const sneakerId = req.params.id;
     const user_id = req.session.user_id;
     if (!user_id) {
       res.error("error");
       return;
     }
-    db.deleteFromMyFavs(req.query)
+    db.deleteFromMyFavs(sneakerId)
       .then(() => {
-        res.redirect("/");
+        res.redirect("/myfavs");
       })
       .catch(e => res.send(e));
   });

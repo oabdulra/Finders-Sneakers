@@ -1,0 +1,41 @@
+.sell-heading {
+  text-align: center;
+}
+
+.sell-main {
+  width: 70%;
+  margin: 0 auto;
+  border: solid 1px #000000;
+
+}
+
+.sell-form {
+  padding: 10px;
+}
+
+.create-post-info {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.create-post-btn {
+  margin-top: 10px;
+}
+
+input {
+  margin-right: 5px;
+}
+
+label {
+  margin-right: 5px;
+  padding-top: 3px;
+}
+
+select {
+  margin-right: 5px;
+}
+
+textarea {
+  resize: none;
+}

@@ -1,12 +1,3 @@
-/* OSAMA: need these functions from db.js :
- - function getAllSneakers(options - object containing filter info) ==> returns array of sneaker objects
- - function getUserWithId(userId) ==> returns user object
- - function getOneSneaker(sneakerId) ==> returns sneaker object
- - function addNewSneaker(sneakerObject) ==> adds new sneaker to db
- - function deleteOneSneaker(sneakerObject) ==> deletes sneaker from db
- - function contactSeller(messageObject) ==> adds new message to db and use some api to send the message?
- - function getMostFavourited() ==> returns array of most favorited items (maybe 5?), route can be found in server.js file since it's the home page but left note here to be easily seen
-*/
 const express = require('express');
 const router  = express.Router();
 
@@ -30,9 +21,23 @@ module.exports = (db) => {
       .catch(e => res.send(e));
   });
 
+  // display form to create new sneaker ad
+  router.get("/new", (req, res) => {
+    const user_id = req.session.user_id;
+    if (!user_id) {
+      res.send({error: "error"});
+    }
+    db.getUserWithId(user_id)
+      .then(user => {
+        res.render("sneakers_new", {user});
+      })
+      .catch(e => res.send(e));
+  });
+
   // display individual sneaker ad
   router.get("/:id", (req, res) => {
-    db.getOneSneaker(req.query)
+    const sneakerId = req.params.id;
+    db.getOneSneaker(sneakerId)
       .then(sneaker => {
         const user_id = req.session.user_id;
         if (!user_id) {
@@ -49,7 +54,8 @@ module.exports = (db) => {
 
   // display form to contact seller
   router.get("/:id/contact", (req, res) => {
-    db.getOneSneaker(req.query)
+    const sneakerId = req.params.id;
+    db.getOneSneaker(sneakerId)
       .then(sneaker => {
         const user_id = req.session.user_id;
         if (!user_id) {
@@ -64,41 +70,45 @@ module.exports = (db) => {
       .catch(e => res.send(e));
   });
 
-  // display form to create new sneaker ad
-  router.get("/new", (req, res) => {
-    const user_id = req.session.user_id;
-    if (!user_id) {
-      res.send({error: "error"});
-    }
-    db.getUserWithId(user_id)
-      .then(user => {
-        res.render("sneakers_new", {user});
-      })
-      .catch(e => res.send(e));
-  });
-
   // create new ad
   router.post("/", (req, res) => {
     const user_id = req.session.user_id;
     if (!user_id) {
       res.send({error: "error"});
     }
+
     db.addNewSneaker({...req.body, owner_id: user_id})
       .then(sneaker => {
-        res.redirect(`/${sneaker.id}`);
+        res.redirect(`/sneakers/${sneaker.id}`);
       })
-      .catch(e => res.send(e));
+      .catch(e => res.send("error"));
   });
 
   // delete ad
   router.post("/:id/delete", (req, res) => {
+    const sneakerId = req.params.id;
+
     const user_id = req.session.user_id;
     if (!user_id) {
       res.send({error: "error"});
     }
-    db.deleteOneSneaker(req.query)
+    db.deleteOneSneaker(sneakerId)
       .then(() => {
-        res.redirect("/");
+        res.redirect("/sneakers");
+      })
+      .catch(e => res.send(e));
+  });
+
+  // mark ad as sold
+  router.post("/:id/sold", (req, res) => {
+    const sneakerId = req.params.id;
+    const user_id = req.session.user_id;
+    if (!user_id) {
+      res.send({error: "error"});
+    }
+    db.markSneakerAsSold(sneakerId)
+      .then(() => {
+        res.redirect("/mycollection");
       })
       .catch(e => res.send(e));
   });
@@ -109,12 +119,11 @@ module.exports = (db) => {
     if (!user_id) {
       res.send({error: "error"});
     }
-    db.contactSeller({...req.body})
-      .then(() => {
-        alert("message sent to seller");
-        res.redirect("/");
-      })
-      .catch(e => res.send(e));
+    if (req.body) {
+      res.redirect("/sneakers");
+    } else {
+      res.send({error: "error"});
+    }
   });
 
   return router;
