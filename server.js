@@ -41,12 +41,14 @@ const usersRoutes = require("./routes/users");
 const sneakersRoutes = require("./routes/sneakers");
 const myCollectionRoutes = require("./routes/my-collection");
 const myFavsRoutes = require("./routes/my-favs");
+const messages = require("./routes/messages");
 
 // Mount all resource routes
 app.use("/users", usersRoutes(db));
 app.use("/sneakers", sneakersRoutes(db));
 app.use("/mycollection", myCollectionRoutes(db));
 app.use("/myfavs", myFavsRoutes(db));
+app.use("/messages", messages(db));
 
 app.get("/", (req, res) => {
   db.getMostFavourited(limit = 5)
