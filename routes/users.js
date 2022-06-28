@@ -1,8 +1,3 @@
-/* OSAMA: need these functions from db.js :
- - function getUserWithId(userId) ==> returns user object
- - function getUserWithEmail(email) ==> returns user object
- - function addUser(userObject) ==> adds new user to db
-*/
 const express = require('express');
 const router  = express.Router();
 
@@ -23,7 +18,6 @@ module.exports = (db) => {
   // create new user
   router.post("/register", (req, res) => {
     const user = req.body;
-    console.log(req.body)
     db.addUser(user)
       .then((user) => {
         if (!user) {
