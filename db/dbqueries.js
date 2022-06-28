@@ -193,8 +193,22 @@ const addToMyFaves = function (sneakerObject) {
 
   const queryString = `
     INSERT INTO favourite_ads (user_id, item_id)
-    VALUES
-  `
+    VALUES ($1, $2);
+  `;
+
+  const queryParams = [
+    sneakerObject.user_id,
+    sneakerObject.item_id
+  ];
+
+   //returns query as a final step
+   return db.query(queryString, queryParams)
+   .then((result) => {
+      result.rows.length;
+   })
+   .catch((err) => {
+     console.log(err.message);
+   });
 };
 
 exports.addToMyFaves = addToMyFaves;
@@ -225,6 +239,15 @@ exports.getMostFavourited = getMostFavourited;
 
 const deleteFromMyFavs= function (sneakerObject) {
 
+  const queryString = `DELETE FROM favourite_ads WHERE id = $1`;
+
+  return db.query(queryString, [sneakerObject])
+        .then((result) => {
+          result.redirect("/")
+        })
+        .catch((err) => {
+          console.log(err.message);
+        })
 
 
 };
