@@ -1,7 +1,11 @@
 const { resolveInclude } = require("ejs");
 const dbParams = require("../lib/db");
 
-
+// PG database client/connection setup
+const { Pool } = require("pg");
+const dbParams = require("./lib/db.js");
+const db = new Pool(dbParams);
+db.connect();
 
 
 //helper function to determine the type of operator needed
@@ -144,11 +148,11 @@ const addOneSneaker = function (sneakerObject) {
 
 exports.addOneSneaker = addOneSneaker;
 
-const deleteOneSneaker = function (sneakerAd) {
+const deleteOneSneaker = function (sneakerObject) {
 
   const queryString = `DELETE FROM posted_ads WHERE id = $1`;
 
-  return db.query(queryString, sneakerAd)
+  return db.query(queryString, [sneakerObject])
         .then((result) => {
           result.redirect("/")
         })
@@ -214,8 +218,6 @@ const getMostFavourited = function () {
   .catch((err) => {
     console.log(err.message);
   });
-
-
 
 };
 
