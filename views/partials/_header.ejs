@@ -6,32 +6,35 @@
     </button>
 
     <!-- If user logged in, show this: -->
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link" href="/browse">Browse</a>
-        <a class="nav-item nav-link" href="/messages">Messages</a>
-        <a class="nav-item nav-link" href="/mycollection">My Collection</a>
-        <a class="nav-item nav-link" href="/sell">Sell Sneaker</a>
-        <a class="nav-item nav-link" href="/favourites">Favourites</a>
+    <% if (user) { %>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="/sneakers">Browse</a>
+          <!-- If have time, implement a messages page: -->
+          <a class="nav-item nav-link" href="*****">Messages</a>
+          <a class="nav-item nav-link" href="/mycollection">My Collection</a>
+          <a class="nav-item nav-link" href="/sneakers/new">Sell Sneaker</a>
+          <a class="nav-item nav-link" href="/myfavs">Favourites</a>
+        </div>
       </div>
-    </div>
-    <div>
-      <form method="POST" action="/logout" style="display: flex">
-      <h5 style="margin-right: 10px; margin-top: 6px">Logged In As: </h5>
-      <button type="submit" class="btn btn-outline-dark">Logout</button>
-      </form>
-    </div>
+      <div>
+        <form method="POST" action="/users/logout" style="display: flex">
+        <h5 style="margin-right: 10px; margin-top: 6px">Logged In As: <%= user.name %>  </h5>
+        <button type="submit" class="btn btn-outline-dark">Logout</button>
+        </form>
+      </div>
+    <% } else { %>
 
     <!-- Else, if user logged out, show this: -->
-    <!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" href="/browse">Browse</a>
+        <a class="nav-item nav-link" href="/sneakers">Browse</a>
       </div>
     </div>
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="/register">Register</a>
-      <a class="nav-item nav-link" href="/login">Login</a>
-    </div> -->
-
+      <a class="nav-item nav-link" href="/users/register">Register</a>
+      <a class="nav-item nav-link" href="/users/login">Login</a>
+    </div>
+    <% } %>
   </nav>
 </header>
