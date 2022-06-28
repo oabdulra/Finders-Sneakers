@@ -1,9 +1,3 @@
-/* OSAMA: need these functions from db.js :
- - function getMyFavs(userId) ==> returns array of sneaker objects
- - function getUserWithId(userId) ==> returns user object
- - function addToMyFavs(sneakerObject) ==> add new sneaker to favs db
- - function deleteFromMyFavs(sneakerObject) ==> remove sneaker from favs db
-*/
 const express = require('express');
 const router  = express.Router();
 
