@@ -9,8 +9,6 @@ module.exports = (db) => {
     db.getAllSneakers(req.query)
       .then(sneakers => {
         const user_id = req.session.user_id;
-        // delete consolelog after******
-        console.log(sneakers)
         if (!user_id) {
           res.render("sneakers", {sneakers, user: null});
         }
@@ -31,7 +29,6 @@ module.exports = (db) => {
     }
     db.getUserWithId(user_id)
       .then(user => {
-        console.log(user)
         res.render("sneakers_new", {user});
       })
       .catch(e => res.send(e));
@@ -79,23 +76,25 @@ module.exports = (db) => {
     if (!user_id) {
       res.send({error: "error"});
     }
+
     db.addNewSneaker({...req.body, owner_id: user_id})
       .then(sneaker => {
-        res.redirect(`/${sneaker.id}`);
+        res.redirect(`/sneakers/${sneaker.id}`);
       })
-      .catch(e => res.send(e));
+      .catch(e => res.send("error"));
   });
 
   // delete ad
   router.post("/:id/delete", (req, res) => {
     const sneakerId = req.params.id;
+
     const user_id = req.session.user_id;
     if (!user_id) {
       res.send({error: "error"});
     }
     db.deleteOneSneaker(sneakerId)
       .then(() => {
-        res.redirect("/");
+        res.redirect("/sneakers");
       })
       .catch(e => res.send(e));
   });
