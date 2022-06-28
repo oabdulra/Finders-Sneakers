@@ -258,6 +258,5 @@ exports.deleteFromMyFavs = deleteFromMyFavs;
 
 /* stretch goal
 const contactSeller = function (messageObject) {
-
 };
 */
