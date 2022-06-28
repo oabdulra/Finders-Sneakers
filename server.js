@@ -62,7 +62,6 @@ app.get("/", (req, res) => {
         .catch(e => res.send(e));
     })
     .catch(e => res.send(e));
-  res.send("ok")
 });
 
 app.listen(PORT, () => {
