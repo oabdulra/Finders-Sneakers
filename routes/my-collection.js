@@ -1,7 +1,3 @@
-/* OSAMA: need these functions from db.js :
- - function getMyCollection(userId) ==> returns array of sneaker objects
- - function getUserWithId(userId) ==> returns user object
-*/
 const express = require('express');
 const router  = express.Router();
 
