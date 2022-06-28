@@ -88,6 +88,24 @@ const getUserWithId = function(userId) {
 
 exports.getUserWithId = getUserWithId;
 
+const getUserWithEmail = function(email) {
+  const queryString = `SELECT * FROM users WHERE email = $1`;
+
+  return db.query(queryString, [email])
+         .then((result) => {
+          if (result.rows) {
+            return result.rows[0];
+          } else {
+            return null;
+          }
+         })
+         .catch((err) => {
+          console.log(err.message);
+         });
+};
+
+exports.getUserWithEmail = getUserWithEmail;
+
 const getAllSneakers = function(options) {
 
   const queryParams = [];
