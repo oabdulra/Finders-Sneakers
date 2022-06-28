@@ -1,0 +1,55 @@
+<!-- When user clicks on a post, they are re-directed to this page
+/sneakers/:id -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FindersSneakers</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/show-sneaker.css" type="text/css" />
+
+  <!-- JavaScript Scripts -->
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+</head>
+
+<body>
+
+  <%- include('partials/_header') %>
+
+  <div class="showsneaker-heading">
+    <h1>Individual Ad's Title</h1>
+  </div>
+
+  <main class="showsneaker-main">
+    <article class="showsneaker-article">
+      <header class="showsneaker-ad-info">
+        <h6>Size</h6>
+        <h6>Price</h6>
+        <h6>Status: Available</h6>
+      </header>
+      <section class="showsneaker-ad-content">
+        <img src="https://images.unsplash.com/photo-1606890658317-7d14490b76fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHNuZWFrZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" width="200" height="200">
+
+        <p class="showsneaker-ad-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu scelerisque tortor. Mauris eleifend vestibulum pellentesque. Phasellus consectetur porttitor turpis, ut suscipit leo pharetra et.</p>
+      </section>
+      <footer class="showsneaker-footer">
+        <button type="submit" class="btn btn-outline-primary showsneaker-btns">Contact Seller</button>
+        <button type="submit" class="btn btn-outline-primary showsneaker-btns">Add to Favourites</button>
+      </footer>
+    </article>
+  </main>
+
+</body>
+</html>
