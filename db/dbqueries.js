@@ -273,7 +273,7 @@ exports.addToMyFavs = addToMyFavs;
 const getMostFavourited = function () {
 
   const queryString = `
-  SELECT favourite_ads.id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold,shoe_size.size, shoe_size.gender, shoe_brands.brand_name
+  SELECT favourite_ads.id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold,shoe_size.size, shoe_brands.brand_name
   FROM favourite_ads
   JOIN posted_ads ON favourite_ads.item_id = posted_ads.id
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
@@ -284,8 +284,9 @@ const getMostFavourited = function () {
   `;
 
   return db.query(queryString)
-  .then((result) =>
-      result.rows )
+  .then((result) => {
+    return result.rows;
+  })
   .catch((err) => {
     console.log(err.message);
   });
