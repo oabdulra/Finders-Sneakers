@@ -52,37 +52,6 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-/* TEMPORARY GET ROUTES JUST TO DISPLAY EACH TEMPLATE BEING BUILT -Raiza */
-app.get("/browse", (req, res) => {
-  res.render("browse")
-});
-
-app.get("/messages", (req, res) => {
-  res.render("messages")
-});
-
-app.get("/mycollection", (req, res) => {
-  res.render("my_collection")
-});
-
-app.get("/sell", (req, res) => {
-  res.render("sell_sneaker")
-});
-
-app.get("/favourites", (req, res) => {
-  res.render("my_favourites")
-});
-
-app.get("/login", (req, res) => {
-  res.render("login")
-});
-
-app.get("/register", (req, res) => {
-  res.render("register")
-});
-
-// ======================================
-
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
