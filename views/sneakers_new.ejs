@@ -27,17 +27,17 @@
   <%- include('partials/_header') %>
 
   <div class="sell-heading">
-    <h1>Create New Post</h1>
+    <h1>Post New Sneaker Ad</h1>
   </div>
 
   <main class="sell-main">
-    <form method="POST" action="/" class="sell-form">
+    <form method="POST" action="/sneakers" class="sell-form">
       <div class="create-post-info">
         <label for="title">Title:</label>
-        <input type="text" name="title" placeholder="Title">
+        <input id="title" type="text" name="title" placeholder="Title">
       </br>
-        <label for="size">Size:</label>
-        <select name="size" placeholder="Shoe Size">
+        <label for="size_id">Size:</label>
+        <select id="size_id" name="size_id" placeholder="Shoe Size">
           <option value = "1">Size 1</option>
           <option value = "2">Size 2</option>
           <option value = "3">Size 3</option>
@@ -54,8 +54,8 @@
           <option value = "14">Size 14</option>
           <option value = "15">Size 15</option>
         </select>
-        <label for="brand">Brand:</label>
-        <select name="brand" placeholder="Shoe Brand">
+        <label for="brand_id">Brand:</label>
+        <select id="brand_id" name="brand_id" placeholder="Shoe Brand">
           <option value = "1">Jordan</option>
           <option value = "2">Nike</option>
           <option value = "3">Adidas</option>
@@ -63,15 +63,15 @@
           <option value = "5">Skechers</option>
         </select>
         <label for="price">Price:</label>
-        <input type="text" name="price" placeholder="Price" size="4">
+        <input id="price" type="text" name="price" placeholder="Price" size="4">
       </div>
-        <label for="description">Description</label>
+        <label for="ad_description">Description</label>
         </br>
-        <textarea placeholder="Enter description" rows="5" cols="60"></textarea>
+        <textarea name="ad_description" id="ad_description" placeholder="Enter description" rows="5" cols="60"></textarea>
         </br>
-        <label for="photo">Photo</label>
+        <label for="ad_photo">Photo</label>
         </br>
-        <input type="text" name="photo" placeholder=" https://" size="40">
+        <input id="ad_photo" type="text" name="ad_photo" placeholder=" https://" size="40">
         </br>
         <input type="submit" class="btn btn-outline-primary create-post-btn">
     </form>
