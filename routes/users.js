@@ -23,14 +23,15 @@ module.exports = (db) => {
   // create new user
   router.post("/register", (req, res) => {
     const user = req.body;
+    console.log(req.body)
     db.addUser(user)
-      .then(user => {
+      .then((user) => {
         if (!user) {
           res.send({error: "error"});
           return;
         }
         req.session.user_id = user.id;
-        res.redirect("/sneakers", {user});
+        res.redirect("/sneakers");
       })
       .catch(e => res.send(e));
   });
@@ -71,7 +72,7 @@ module.exports = (db) => {
           return;
         }
         req.session.user_id = user.id;
-        res.redirect("/sneakers", {user});
+        res.redirect("/sneakers");
       })
       .catch(e => res.send(e));
   });
@@ -79,7 +80,7 @@ module.exports = (db) => {
   // logout of account
   router.post("/logout", (req, res) => {
     req.session.user_id = null;
-    res.redirect("/sneakers", {user: null});
+    res.redirect("/sneakers");
   });
 
   return router;
