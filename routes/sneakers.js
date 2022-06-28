@@ -94,7 +94,7 @@ module.exports = (db) => {
     }
     db.deleteOneSneaker(sneakerId)
       .then(() => {
-        res.redirect("/sneakers");
+        res.redirect("/mycollection");
       })
       .catch(e => res.send(e));
   });
