@@ -157,6 +157,25 @@ const deleteOneSneaker = function (sneakerAd) {
 
 exports.deleteOneSneaker = deleteOneSneaker;
 
+const getMyFaves = function (userId) {
+
+  const queryString = `
+  SELECT favourite_ads.id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold,shoe_size.size, shoe_size.gender, shoe_brands.brand_name
+  FROM favourite_ads
+  JOIN posted_ads ON favourite_ads.item_id = posted_ads.id
+  JOIN shoe_size ON posted_ads.size_id = shoe_size.id
+  JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
+  WHERE user_id = 1
+  GROUP BY favourite_ads.id, posted_ads.id , shoe_size.id, shoe_brands.id
+  ORDER BY favourite_ads.id;
+  `
+
+
+
+};
+
+exports.getMyFaves = getMyFaves;
+
 
 /*
 const contactSeller = function (messageObject) {
