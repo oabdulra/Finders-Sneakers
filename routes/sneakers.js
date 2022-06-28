@@ -114,12 +114,11 @@ module.exports = (db) => {
     if (!user_id) {
       res.send({error: "error"});
     }
-    db.contactSeller({...req.body})
-      .then(() => {
-        alert("message sent to seller");
-        res.redirect("/");
-      })
-      .catch(e => res.send(e));
+    if (req.body) {
+      res.redirect("/sneakers");
+    } else {
+      res.send({error: "error"});
+    }
   });
 
   return router;
