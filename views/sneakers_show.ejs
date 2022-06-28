@@ -36,7 +36,8 @@
       <article class="showsneaker-article">
         <header class="showsneaker-ad-info">
           <h6>Size: <%= sneaker.size %> </h6>
-          <h6>Price: <%= sneaker.price %> </h6>
+          <h6>Price: $<%= sneaker.price %> </h6>
+          <h6>Brand: <%= sneaker.brand_name %> </h6>
           <h6>
             <% if (!sneaker.ad_sold) { %>
               Status: Available
@@ -44,6 +45,7 @@
               Status: Sold
             <% } %>
           </h6>
+          <h6></h6>
         </header>
         <section class="showsneaker-ad-content">
           <img src=<%= sneaker.ad_photo %>  width="200" height="200">
@@ -53,9 +55,6 @@
         <footer class="showsneaker-footer">
           <footer class="browse-footer">
             <p>Posted on: <%= sneaker.post_date %> </p>
-            <button type="button" class="btn btn-outline-primary browse-btns">
-              <a href="/sneakers/<%= sneaker.id %>">View Details</a>
-            </button>
             <button type="button" class="btn btn-outline-primary browse-btns">
               <a href="/sneakers/<%= sneaker.id %>/contact ">Contact Seller</a>
             </button>
