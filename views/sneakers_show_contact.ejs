@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FindersSneakers</title>
-
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -16,7 +17,7 @@
 
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/login.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/contact.css" type="text/css" />
 
   <!-- JavaScript Scripts -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -25,19 +26,26 @@
 
 <body>
   <%- include('partials/_header') %>
-  <div class="log-res">
-    <header>
-      <h3>Log In</h3>
-    </header>
-    <main>
-      <p>Don't have an account? <a href="/users/register">Register</a></p>
-      <form action="/users/login" method="POST">
-        <label>Email</label>
-        <input class="form-control" type="text" name="email" placeholder="Enter email">
-        <button type="submit" class="btn btn-outline-primary login-form-btn">Submit</button>
-      </form>
-    </main>
-  </div>
-</body>
 
+  <div class="contact-heading">
+    <h1>Contact Seller</h1>
+  </div>
+
+  <main class="contact-main">
+    <article class="contact-article">
+      <header class="contact-ad-info">
+        <h6>Sneaker Name: <%= sneaker.title %> </h6>
+        <h6>Price: $<%= sneaker.price %> </h6>
+        <h6> From: <%= user.name %> </h6>
+      </header>
+      <section>
+        <form action="/sneakers/<%= sneaker.id %> " method="post">
+          <textarea name="message" id="message" cols="30" rows="10" placeholder="enter message here"></textarea>
+          <button>submit message to seller</button>
+        </form>
+      </section>
+    </article>
+  </main>
+
+</body>
 </html>

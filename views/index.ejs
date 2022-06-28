@@ -33,44 +33,22 @@
   </div>
 
   <main class="index-main-container">
+
+    <% for (let sneaker of sneakers) { %>
     <article class="index-article">
       <header class="index-ad-info">
-        <h6>Ad Title</h6>
-        <h6>Size</h6>
-        <h6>Price</h6>
+        <h6><%= sneaker.title %> </h6>
+        <h6>Size: <%= sneaker.size %> </h6>
+        <h6>Price: <%= sneaker.price %> </h6>
       </header>
       <section class="index-ad-content">
-        <img src="https://images.unsplash.com/photo-1607522370275-f14206abe5d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1121&q=80" width="200" height="200">
+        <img src=<%= sneaker.ad_photo %>  width="200" height="200">
 
-        <p class="index-ad-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu scelerisque tortor. Mauris eleifend vestibulum pellentesque. Phasellus consectetur porttitor turpis, ut suscipit leo pharetra et.</p>
+        <p class="index-ad-desc"><%= sneaker.ad_description %> </p>
       </section>
     </article>
+    <% } %>
 
-    <article class="index-article">
-      <header class="index-ad-info">
-        <h6>Ad Title</h6>
-        <h6>Size</h6>
-        <h6>Price</h6>
-      </header>
-      <section class="index-ad-content">
-        <img src="https://images.unsplash.com/photo-1607522370275-f14206abe5d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1121&q=80" width="200" height="200">
-
-        <p class="index-ad-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu scelerisque tortor. Mauris eleifend vestibulum pellentesque. Phasellus consectetur porttitor turpis, ut suscipit leo pharetra et.</p>
-      </section>
-    </article>
-
-    <article class="index-article">
-      <header class="index-ad-info">
-        <h6>Ad Title</h6>
-        <h6>Size</h6>
-        <h6>Price</h6>
-      </header>
-      <section class="index-ad-content">
-        <img src="https://images.unsplash.com/photo-1607522370275-f14206abe5d3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1121&q=80" width="200" height="200">
-
-        <p class="index-ad-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu scelerisque tortor. Mauris eleifend vestibulum pellentesque. Phasellus consectetur porttitor turpis, ut suscipit leo pharetra et.</p>
-      </section>
-  </article>
   </main>
 </body>
 

@@ -31,14 +31,14 @@
       <h3>Register</h3>
     </header>
     <main>
-      <p>Already have an account? <a href="/login">Register</a></p>
-      <form action="/register" method="POST">
+      <p>Already have an account? <a href="/users/login">Login</a></p>
+      <form action="/users/register" method="POST">
         <label>Name</label>
         <input class="form-control" type="text" name="name" placeholder="Your name">
         <label>Email</label>
         <input class="form-control" type="email" name="email" placeholder="name@email.com">
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
       </form>
-      <button type="submit" class="btn btn-outline-primary">Submit</button>
     </main>
   </div>
 </body>

@@ -1,25 +1,81 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
+  // display form to register
+  router.get("/register", (req, res) => {
+    const user_id = req.session.user_id;
+    if (!user_id) {
+      res.render("register", {user: null});
+    }
+    db.getUserWithId(user_id)
+      .then(user => {
+        res.render("register", {user});
       })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+      .catch(e => res.send(e));
   });
+
+  // create new user
+  router.post("/register", (req, res) => {
+    const user = req.body;
+    db.addUser(user)
+      .then((user) => {
+        if (!user) {
+          res.send({error: "error"});
+          return;
+        }
+        req.session.user_id = user.id;
+        res.redirect("/sneakers");
+      })
+      .catch(e => res.send(e));
+  });
+
+  // display form to login
+  router.get("/login", (req, res) => {
+    const user_id = req.session.user_id;
+    if (!user_id) {
+      res.render("login", {user: null});
+    }
+    db.getUserWithId(user_id)
+      .then(user => {
+        res.render("login", {user});
+      })
+      .catch(e => res.send(e));
+  });
+
+  // check if user exists with given email
+  const login =  function(email) {
+    return db.getUserWithEmail(email)
+      .then(user => {
+        if (user.email) {
+          return user;
+        }
+        return null;
+      })
+      .catch(e => res.send(e));
+  };
+  exports.login = login;
+
+  // login to existing account
+  router.post("/login", (req, res) => {
+    const {email} = req.body;
+    login(email)
+      .then(user => {
+        if (!user) {
+          res.send({error: "error"});
+          return;
+        }
+        req.session.user_id = user.id;
+        res.redirect("/sneakers");
+      })
+      .catch(e => res.send(e));
+  });
+
+  // logout of account
+  router.post("/logout", (req, res) => {
+    req.session.user_id = null;
+    res.redirect("/");
+  });
+
   return router;
 };
