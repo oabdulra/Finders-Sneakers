@@ -1,10 +1,12 @@
 const { resolveInclude } = require("ejs");
+const dbParams = require("../lib/db");
 
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect();
+
 
 //helper function to determine the type of operator needed
 const queryOp = (queryParams) => {
@@ -21,12 +23,12 @@ const queryOp = (queryParams) => {
 const getMyCollection = function(userId) {
 
   const queryString = `
-  SELECT posted_ads.*
+  SELECT posted_ads.*, shoe_size.*, shoe_brands.*
   FROM posted_ads
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
   JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
   WHERE owner_id = $1
-  GROUP BY posted_ads.id
+  GROUP BY posted_ads.id , shoe_size.id, shoe_brands.id
   ORDER BY posted_ads.post_date;
   `;
 
@@ -67,23 +69,23 @@ const getAllSneakers = function(options) {
   const queryParams = [];
 
   let queryString = `
-  SELECT posted_ads.*
+  SELECT posted_ads.* , shoe_size.*, shoe_brands.*
   FROM posted_ads
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
-  JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id;`;
+  JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id`;
 
-  if (options.minimum_price_per_night) {
+  if (options.minimum_price) {
     queryParams.push(`${options.minimum_price}`);
     queryString += `${queryOp(queryParams)} price >=  $${queryParams.length}`;
   }
 
-  if (options.maximum_price_per_night) {
+  if (options.maximum_price) {
     queryParams.push(`${options.maximum_price * 100}`);
     queryString += `${queryOp(queryParams)} price <=  $${queryParams.length}`;
   }
 
   queryString += `
-  GROUP BY posted_ads.id
+  GROUP BY posted_ads.id, shoe_size.id, shoe_brands.id
   ORDER BY price;`;
 
   return db.query(queryString, queryParams)
@@ -146,11 +148,11 @@ const addOneSneaker = function (sneakerObject) {
 
 exports.addOneSneaker = addOneSneaker;
 
-const deleteOneSneaker = function (sneakerAd) {
+const deleteOneSneaker = function (sneakerObject) {
 
   const queryString = `DELETE FROM posted_ads WHERE id = $1`;
 
-  return db.query(queryString, sneakerAd)
+  return db.query(queryString, [sneakerObject])
         .then((result) => {
           result.redirect("/")
         })
@@ -162,8 +164,99 @@ const deleteOneSneaker = function (sneakerAd) {
 
 exports.deleteOneSneaker = deleteOneSneaker;
 
+const getMyFaves = function (userId) {
 
-/*
+  const queryString = `
+  SELECT favourite_ads.id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold,shoe_size.size, shoe_size.gender, shoe_brands.brand_name
+  FROM favourite_ads
+  JOIN posted_ads ON favourite_ads.item_id = posted_ads.id
+  JOIN shoe_size ON posted_ads.size_id = shoe_size.id
+  JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
+  WHERE user_id = $1
+  GROUP BY favourite_ads.id, posted_ads.id , shoe_size.id, shoe_brands.id
+  ORDER BY favourite_ads.id;
+  `;
+
+  return db.query(queryString, [userId])
+  .then((result) => {
+    return result.rows;
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+
+};
+
+exports.getMyFaves = getMyFaves;
+
+const addToMyFaves = function (sneakerObject) {
+
+  const queryString = `
+    INSERT INTO favourite_ads (user_id, item_id)
+    VALUES ($1, $2);
+  `;
+
+  const queryParams = [
+    sneakerObject.user_id,
+    sneakerObject.item_id
+  ];
+
+   //returns query as a final step
+   return db.query(queryString, queryParams)
+   .then((result) => {
+      result.rows.length;
+   })
+   .catch((err) => {
+     console.log(err.message);
+   });
+};
+
+exports.addToMyFaves = addToMyFaves;
+
+const getMostFavourited = function () {
+
+  const queryString = `
+  SELECT favourite_ads.id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold,shoe_size.size, shoe_size.gender, shoe_brands.brand_name
+  FROM favourite_ads
+  JOIN posted_ads ON favourite_ads.item_id = posted_ads.id
+  JOIN shoe_size ON posted_ads.size_id = shoe_size.id
+  JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
+  GROUP BY favourite_ads.id, posted_ads.id , shoe_size.id, shoe_brands.id
+  ORDER BY COUNT(favourite_ads.item_id) DESC
+  LIMIT 5;
+  `;
+
+  return db.query(queryString)
+  .then((result) =>
+      result.rows )
+  .catch((err) => {
+    console.log(err.message);
+  });
+
+};
+
+exports.getMostFavourited = getMostFavourited;
+
+const deleteFromMyFavs= function (sneakerObject) {
+
+  const queryString = `DELETE FROM favourite_ads WHERE id = $1`;
+
+  return db.query(queryString, [sneakerObject])
+        .then((result) => {
+          result.redirect("/")
+        })
+        .catch((err) => {
+          console.log(err.message);
+        })
+
+
+};
+
+exports.deleteFromMyFavs = deleteFromMyFavs;
+
+
+
+/* stretch goal
 const contactSeller = function (messageObject) {
 };
 */
