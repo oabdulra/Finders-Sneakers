@@ -296,7 +296,24 @@ const deleteFromMyFavs= function (sneakerObject) {
 
 exports.deleteFromMyFavs = deleteFromMyFavs;
 
+const markSneakerAsSold = function(sneakerId) {
+  const queryString = `
+  UPDATE posted_ads
+  SET ad_sold = true
+  WHERE id = $1
+  RETURNING *`;
 
+   //returns query as a final step
+   return db.query(queryString, [sneakerId])
+   .then((result) => {
+      return result.rows[0];
+   })
+   .catch((err) => {
+     console.log(err.message);
+   });
+};
+
+exports.markSneakerAsSold = markSneakerAsSold;
 
 /* stretch goal
 const contactSeller = function (messageObject) {
