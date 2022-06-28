@@ -15,7 +15,6 @@ module.exports = (db) => {
 
   // display all sneaker ads
   router.get("/", (req, res) => {
-    console.log(req.session)
     db.getAllSneakers(req.query)
       .then(sneakers => {
         const user_id = req.session.user_id;
@@ -29,6 +28,20 @@ module.exports = (db) => {
             res.render("sneakers", {sneakers, user});
           })
           .catch(e => res.send(e));
+      })
+      .catch(e => res.send(e));
+  });
+
+  // display form to create new sneaker ad
+  router.get("/new", (req, res) => {
+    const user_id = req.session.user_id;
+    if (!user_id) {
+      res.send({error: "error"});
+    }
+    db.getUserWithId(user_id)
+      .then(user => {
+        console.log(user)
+        res.render("sneakers_new", {user});
       })
       .catch(e => res.send(e));
   });
@@ -69,19 +82,6 @@ module.exports = (db) => {
       .catch(e => res.send(e));
   });
 
-  // display form to create new sneaker ad
-  router.get("/new", (req, res) => {
-    const user_id = req.session.user_id;
-    if (!user_id) {
-      res.send({error: "error"});
-    }
-    db.getUserWithId(user_id)
-      .then(user => {
-        res.render("sneakers_new", {user});
-      })
-      .catch(e => res.send(e));
-  });
-
   // create new ad
   router.post("/", (req, res) => {
     const user_id = req.session.user_id;
@@ -97,13 +97,28 @@ module.exports = (db) => {
 
   // delete ad
   router.post("/:id/delete", (req, res) => {
+    const sneakerId = req.params.id;
     const user_id = req.session.user_id;
     if (!user_id) {
       res.send({error: "error"});
     }
-    db.deleteOneSneaker(req.query)
+    db.deleteOneSneaker(sneakerId)
       .then(() => {
         res.redirect("/");
+      })
+      .catch(e => res.send(e));
+  });
+
+  // mark ad as sold
+  router.post("/:id/sold", (req, res) => {
+    const sneakerId = req.params.id;
+    const user_id = req.session.user_id;
+    if (!user_id) {
+      res.send({error: "error"});
+    }
+    db.markSneakerAsSold(sneakerId)
+      .then(() => {
+        res.redirect("/mycollection");
       })
       .catch(e => res.send(e));
   });
