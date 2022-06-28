@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home Page</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/my-collection.css" type="text/css" />
+
+  <!-- JavaScript Scripts -->
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+</head>
+
+
+<body>
+  <%- include('partials/_header') %>
+
+  <div class="mycoll-heading">
+    <h1>My Collection</h1>
+  </div>
+
+  <main class="mycoll-main">
+
+    <% for (let sneaker of collection) { %>
+      <article class="mycoll-article">
+        <header class="mycoll-ad-info">
+          <h6> <%= sneaker.title %>  </h6>
+          <h6>Size: <%= sneaker.size %></h6>
+          <h6>$<%= sneaker.price %></h6>
+          <h6>
+            <% if (!sneaker.ad_sold) { %>
+              Status: Available
+            <% } else { %>
+              Status: Sold
+            <% } %>
+          </h6>
+        </header>
+        <section class="mycoll-ad-content">
+          <img src= <%= sneaker.ad_photo %> width="200" height="200">
+          <p class="mycoll-ad-desc"><%= sneaker.ad_description %></p>
+        </section>
+        <footer class="mycoll-footer">
+          <form action="/sneakers/<%= sneaker.id %>/delete" method="post">
+            <button type="submit" class="btn btn-outline-primary mycoll-footer-btns">Delete</button>
+          </form>
+          <form action="/sneakers/<%= sneaker.id %>/sold">
+            <button type="submit" class="btn btn-outline-primary mycoll-footer-btns">Mark as Sold</button>
+          </form>
+        </footer>
+      </article>
+    <% } %>
+
+  </main>
+</body>
+</html>
