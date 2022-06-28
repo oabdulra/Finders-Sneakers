@@ -16,12 +16,12 @@ const queryOp = (queryParams) => {
 const getMyCollection = function(userId) {
 
   const queryString = `
-  SELECT posted_ads.*
+  SELECT posted_ads.*, shoe_size.*, shoe_brands.*
   FROM posted_ads
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
   JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
-  WHERE owner_id = $1
-  GROUP BY posted_ads.id
+  WHERE owner_id = 1
+  GROUP BY posted_ads.id , shoe_size.id, shoe_brands.id
   ORDER BY posted_ads.post_date;
   `;
 
@@ -62,23 +62,23 @@ const getAllSneakers = function(options) {
   const queryParams = [];
 
   let queryString = `
-  SELECT posted_ads.*
+  SELECT posted_ads.* , shoe_size.*, shoe_brands.*
   FROM posted_ads
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
-  JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id;`;
+  JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id`;
 
-  if (options.minimum_price_per_night) {
+  if (options.minimum_price) {
     queryParams.push(`${options.minimum_price}`);
     queryString += `${queryOp(queryParams)} price >=  $${queryParams.length}`;
   }
 
-  if (options.maximum_price_per_night) {
+  if (options.maximum_price) {
     queryParams.push(`${options.maximum_price * 100}`);
     queryString += `${queryOp(queryParams)} price <=  $${queryParams.length}`;
   }
 
   queryString += `
-  GROUP BY posted_ads.id
+  GROUP BY posted_ads.id, shoe_size.id, shoe_brands.id
   ORDER BY price;`;
 
   return db.query(queryString, queryParams)
