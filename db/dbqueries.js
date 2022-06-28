@@ -33,7 +33,6 @@ const addUser = function(user) {
    //returns query as a final step
    return db.query(queryString, queryParams)
    .then((result) => {
-    console.log(result.rows[0])
       return result.rows[0];
    })
    .catch((err) => {
@@ -170,7 +169,6 @@ exports.getOneSneaker = getOneSneaker;
 
 const addNewSneaker = function (sneakerObject, owner_id) {
 
-  console.log("sneakerObj:", sneakerObject)
   const queryString = `
   INSERT INTO posted_ads (owner_id, title, ad_photo, ad_description, price, size_id, brand_id, post_date, ad_sold)
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -188,7 +186,6 @@ const addNewSneaker = function (sneakerObject, owner_id) {
     '2022-06-28',
     false
   );
-  console.log(queryParams)
 
    //returns query as a final step
    return db.query(queryString, queryParams)
@@ -209,8 +206,7 @@ const deleteOneSneaker = function (sneakerId) {
   DELETE FROM posted_ads WHERE id = $1
   RETURNING *
   `;
-  console.log(queryString)
-  console.log(sneakerId)
+
   return db.query(queryString, [sneakerId])
         .then((result) => {
           return result.rows[0];
@@ -223,7 +219,7 @@ const deleteOneSneaker = function (sneakerId) {
 
 exports.deleteOneSneaker = deleteOneSneaker;
 
-const getMyFaves = function (userId) {
+const getMyFavs = function (userId) {
 
   const queryString = `
   SELECT favourite_ads.id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold,shoe_size.size, shoe_size.gender, shoe_brands.brand_name
@@ -231,7 +227,7 @@ const getMyFaves = function (userId) {
   JOIN posted_ads ON favourite_ads.item_id = posted_ads.id
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
   JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
-  WHERE user_id = $1
+  WHERE favourite_ads.user_id = $1
   GROUP BY favourite_ads.id, posted_ads.id , shoe_size.id, shoe_brands.id
   ORDER BY favourite_ads.id;
   `;
@@ -246,31 +242,33 @@ const getMyFaves = function (userId) {
 
 };
 
-exports.getMyFaves = getMyFaves;
+exports.getMyFavs = getMyFavs;
 
-const addToMyFaves = function (sneakerObject) {
+const addToMyFavs = function (sneakerId, owner_id) {
 
   const queryString = `
     INSERT INTO favourite_ads (user_id, item_id)
-    VALUES ($1, $2);
+    VALUES ($1, $2)
+    RETURNING *;
   `;
 
   const queryParams = [
-    sneakerObject.user_id,
-    sneakerObject.item_id
+    owner_id,
+    Number(sneakerId)
   ];
+  console.log(queryParams)
 
    //returns query as a final step
    return db.query(queryString, queryParams)
    .then((result) => {
-      result.rows.length;
+      return result.rows[0];
    })
    .catch((err) => {
      console.log(err.message);
    });
 };
 
-exports.addToMyFaves = addToMyFaves;
+exports.addToMyFavs = addToMyFavs;
 
 const getMostFavourited = function () {
 
@@ -296,13 +294,16 @@ const getMostFavourited = function () {
 
 exports.getMostFavourited = getMostFavourited;
 
-const deleteFromMyFavs= function (sneakerObject) {
+const deleteFromMyFavs= function (sneakerId) {
 
-  const queryString = `DELETE FROM favourite_ads WHERE id = $1`;
+  const queryString = `
+  DELETE FROM favourite_ads WHERE id = $1
+  RETURNING *
+  `;
 
-  return db.query(queryString, [sneakerObject])
+  return db.query(queryString, [sneakerId])
         .then((result) => {
-          result.redirect("/")
+          return result.rows[0];
         })
         .catch((err) => {
           console.log(err.message);
