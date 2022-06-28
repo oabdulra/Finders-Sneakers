@@ -1,0 +1,70 @@
+<!-- When user clicks on a post, they are re-directed to this page
+/sneakers/:id -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FindersSneakers</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/show-sneaker.css" type="text/css" />
+
+  <!-- JavaScript Scripts -->
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+</head>
+
+<body>
+
+  <%- include('partials/_header') %>
+
+    <div class="showsneaker-heading">
+      <h1><%= sneaker.title %> </h1>
+    </div>
+
+    <main class="showsneaker-main">
+      <article class="showsneaker-article">
+        <header class="showsneaker-ad-info">
+          <h6>Size: <%= sneaker.size %> </h6>
+          <h6>Price: <%= sneaker.price %> </h6>
+          <h6>
+            <% if (!sneaker.ad_sold) { %>
+              Status: Available
+            <% } else { %>
+              Status: Sold
+            <% } %>
+          </h6>
+        </header>
+        <section class="showsneaker-ad-content">
+          <img src=<%= sneaker.ad_photo %>  width="200" height="200">
+
+          <p class="showsneaker-ad-desc"><%= sneaker.ad_description %> </p>
+        </section>
+        <footer class="showsneaker-footer">
+          <footer class="browse-footer">
+            <p>Posted on: <%= sneaker.post_date %> </p>
+            <button type="button" class="btn btn-outline-primary browse-btns">
+              <a href="/sneakers/<%= sneaker.id %>">View Details</a>
+            </button>
+            <button type="button" class="btn btn-outline-primary browse-btns">
+              <a href="/sneakers/<%= sneaker.id %>/contact ">Contact Seller</a>
+            </button>
+            <form action="/myfavs" method="post">
+              <button type="submit" class="btn btn-outline-primary browse-btns">Add to Favourites</button>
+            </form>
+          </footer>
+      </article>
+    </main>
+
+</body>
+</html>
