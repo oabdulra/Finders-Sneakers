@@ -69,12 +69,15 @@
           <button type="button" class="btn btn-outline-primary browse-btns">
             <a href="/sneakers/<%= sneaker.id %>">View Details</a>
           </button>
+
+          <% if (user) { %>
           <button type="button" class="btn btn-outline-primary browse-btns">
             <a href="/sneakers/<%= sneaker.id %>/contact ">Contact Seller</a>
           </button>
           <form action="/myfavs/<%= sneaker.id %> " method="post">
             <button type="submit" class="btn btn-outline-primary browse-btns">Add to Favourites</button>
           </form>
+          <% } %>
         </footer>
       </article>
       <% } %>

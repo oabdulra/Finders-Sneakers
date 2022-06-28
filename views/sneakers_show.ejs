@@ -55,12 +55,16 @@
         <footer class="showsneaker-footer">
           <footer class="browse-footer">
             <p>Posted on: <%= sneaker.post_date %> </p>
-            <button type="button" class="btn btn-outline-primary browse-btns">
-              <a href="/sneakers/<%= sneaker.id %>/contact ">Contact Seller</a>
-            </button>
-            <form action="/myfavs/<%= sneaker.id %>" method="post">
-              <button type="submit" class="btn btn-outline-primary browse-btns">Add to Favourites</button>
-            </form>
+
+            <% if (user) { %>
+              <button type="button" class="btn btn-outline-primary browse-btns">
+                <a href="/sneakers/<%= sneaker.id %>/contact ">Contact Seller</a>
+              </button>
+              <form action="/myfavs/<%= sneaker.id %>" method="post">
+                <button type="submit" class="btn btn-outline-primary browse-btns">Add to Favourites</button>
+              </form>
+            <% } %>
+
           </footer>
       </article>
     </main>
