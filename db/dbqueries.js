@@ -47,12 +47,11 @@ exports.addUser = addUser;
 const getMyCollection = function(userId) {
 
   const queryString = `
-  SELECT posted_ads.*, shoe_size.*, shoe_brands.*
+  SELECT posted_ads.id, posted_ads.owner_id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold, shoe_size.size, shoe_brands.brand_name
   FROM posted_ads
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
   JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
-  WHERE owner_id = $1
-  GROUP BY posted_ads.id , shoe_size.id, shoe_brands.id
+  WHERE posted_ads.owner_id = $1
   ORDER BY posted_ads.post_date;
   `;
 
@@ -111,7 +110,7 @@ const getAllSneakers = function(options) {
   const queryParams = [];
 
   let queryString = `
-  SELECT posted_ads.* , shoe_size.*, shoe_brands.*
+  SELECT posted_ads.id, posted_ads.owner_id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold, shoe_size.size, shoe_brands.brand_name
   FROM posted_ads
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
   JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id`;
@@ -127,12 +126,17 @@ const getAllSneakers = function(options) {
   }
 
   queryString += `
-  GROUP BY posted_ads.id, shoe_size.id, shoe_brands.id
+
   ORDER BY price;`;
 
   return db.query(queryString, queryParams)
-  .then((result) =>
-      result.rows )
+  .then((result) => {
+    if (result.rows) {
+      return result.rows;
+    } else {
+      return null;
+    }
+  })
   .catch((err) => {
     console.log(err.message);
   });
@@ -142,7 +146,13 @@ exports.getAllSneakers = getAllSneakers;
 
 const getOneSneaker = function(sneakerId) {
 
-  const queryString = `SELECT * FROM posted_ads WHERE id = $1`;
+  const queryString = `
+  SELECT posted_ads.id, posted_ads.owner_id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold, shoe_size.size, shoe_brands.brand_name
+  FROM posted_ads
+  JOIN shoe_size ON posted_ads.size_id = shoe_size.id
+  JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
+  WHERE posted_ads.id = $1
+  `;
 
   return db.query(queryString, [sneakerId])
           .then((result) => {
@@ -158,8 +168,9 @@ const getOneSneaker = function(sneakerId) {
 };
 exports.getOneSneaker = getOneSneaker;
 
-const addNewSneaker = function (sneakerObject) {
+const addNewSneaker = function (sneakerObject, owner_id) {
 
+  console.log("sneakerObj:", sneakerObject)
   const queryString = `
   INSERT INTO posted_ads (owner_id, title, ad_photo, ad_description, price, size_id, brand_id, post_date, ad_sold)
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -169,14 +180,15 @@ const addNewSneaker = function (sneakerObject) {
   queryParams.push(
     sneakerObject.owner_id,
     `${sneakerObject.title}`,
-    `${sneakerObject.photo}`,
-    `${sneakerObject.description}`,
+    `${sneakerObject.ad_photo}`,
+    `${sneakerObject.ad_description}`,
     Number(sneakerObject.price),
-    Number(sneakerObject.size),
-    Number(sneakerObject.brand),
-    '2019-01-04',
+    Number(sneakerObject.size_id),
+    Number(sneakerObject.brand_id),
+    '2022-06-28',
     false
   );
+  console.log(queryParams)
 
    //returns query as a final step
    return db.query(queryString, queryParams)
@@ -191,14 +203,15 @@ const addNewSneaker = function (sneakerObject) {
 
 exports.addNewSneaker = addNewSneaker;
 
-const deleteOneSneaker = function (sneakerObject) {
+const deleteOneSneaker = function (sneakerId) {
 
   const queryString = `
   DELETE FROM posted_ads WHERE id = $1
   RETURNING *
   `;
-
-  return db.query(queryString, [sneakerObject])
+  console.log(queryString)
+  console.log(sneakerId)
+  return db.query(queryString, [sneakerId])
         .then((result) => {
           return result.rows[0];
         })
