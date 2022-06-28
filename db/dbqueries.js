@@ -158,29 +158,30 @@ const getOneSneaker = function(sneakerId) {
 };
 exports.getOneSneaker = getOneSneaker;
 
-const addOneSneaker = function (sneakerObject) {
+const addNewSneaker = function (sneakerObject) {
 
   const queryString = `
   INSERT INTO posted_ads (owner_id, title, ad_photo, ad_description, price, size_id, brand_id, post_date, ad_sold)
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
   RETURNING *`;
 
-  const queryParams = [
+  const queryParams = [];
+  queryParams.push(
     sneakerObject.owner_id,
-    sneakerObject.title,
-    sneakerObject.ad_photo,
-    sneakerObject.ad_description,
-    sneakerObject.price,
-    sneakerObject.size_id,
-    sneakerObject.brand_id,
-    sneakerObject.post_date,
-    sneakerObject.ad_sold
-  ];
+    `${sneakerObject.title}`,
+    `${sneakerObject.photo}`,
+    `${sneakerObject.description}`,
+    Number(sneakerObject.price),
+    Number(sneakerObject.size),
+    Number(sneakerObject.brand),
+    '2019-01-04',
+    false
+  );
 
    //returns query as a final step
    return db.query(queryString, queryParams)
    .then((result) => {
-      result.rows.length;
+      return result.rows[0];
    })
    .catch((err) => {
      console.log(err.message);
@@ -188,15 +189,18 @@ const addOneSneaker = function (sneakerObject) {
 
 };
 
-exports.addOneSneaker = addOneSneaker;
+exports.addNewSneaker = addNewSneaker;
 
 const deleteOneSneaker = function (sneakerObject) {
 
-  const queryString = `DELETE FROM posted_ads WHERE id = $1`;
+  const queryString = `
+  DELETE FROM posted_ads WHERE id = $1
+  RETURNING *
+  `;
 
   return db.query(queryString, [sneakerObject])
         .then((result) => {
-          result.redirect("/")
+          return result.rows[0];
         })
         .catch((err) => {
           console.log(err.message);
