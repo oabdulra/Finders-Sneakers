@@ -20,7 +20,7 @@ const getMyCollection = function(userId) {
   FROM posted_ads
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
   JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
-  WHERE owner_id = 1
+  WHERE owner_id = $1
   GROUP BY posted_ads.id , shoe_size.id, shoe_brands.id
   ORDER BY posted_ads.post_date;
   `;
@@ -165,16 +165,30 @@ const getMyFaves = function (userId) {
   JOIN posted_ads ON favourite_ads.item_id = posted_ads.id
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
   JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
-  WHERE user_id = 1
+  WHERE user_id = $1
   GROUP BY favourite_ads.id, posted_ads.id , shoe_size.id, shoe_brands.id
   ORDER BY favourite_ads.id;
-  `
+  `;
+
+  return db.query(queryString, [userId])
+  .then((result) => {
+    return result.rows;
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+
+};
+
+exports.getMyFaves = getMyFaves;
+
+const addToMyFaves = function (sneakerObject) {
 
 
 
 };
 
-exports.getMyFaves = getMyFaves;
+exports.addToMyFaves = addToMyFaves;
 
 
 /*
