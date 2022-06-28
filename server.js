@@ -19,7 +19,11 @@ const db = require("./db/dbqueries");
 app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
+app.use(cookieSession({
+  name: "session",
+  keys: ["key 1"]
+}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   "/styles",
@@ -31,11 +35,6 @@ app.use(
 );
 
 app.use(express.static("public"));
-
-app.use(cookieSession({
-  name: "session",
-  keys: ["key 1", "key 2"]
-}));
 
 // Separated Routes for each Resource
 const usersRoutes = require("./routes/users");
