@@ -146,7 +146,7 @@ exports.getAllSneakers = getAllSneakers;
 const getOneSneaker = function(sneakerId) {
 
   const queryString = `
-  SELECT posted_ads.id, posted_ads.owner_id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold, shoe_size.size, shoe_brands.brand_name
+  SELECT posted_ads.id, posted_ads.owner_id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, TO_CHAR(posted_ads.post_date, 'Mon dd, yyyy') as post_date, posted_ads.ad_sold, shoe_size.size, shoe_brands.brand_name
   FROM posted_ads
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
   JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
