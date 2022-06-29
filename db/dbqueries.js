@@ -120,7 +120,7 @@ const getAllSneakers = function(options) {
   }
 
   if (options.maximum_price) {
-    queryParams.push(`${options.maximum_price * 100}`);
+    queryParams.push(`${options.maximum_price}`);
     queryString += `${queryOp(queryParams)} price <=  $${queryParams.length}`;
   }
 
