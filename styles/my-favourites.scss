@@ -32,7 +32,8 @@
 }
 
 .myfavs-footer {
-  margin-left: 5px;
+  display: flex;
+  flex-direction: row;
   margin-top: 15px;
 }
 
