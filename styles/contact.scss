@@ -8,6 +8,7 @@
 }
 
 .contact-article {
+  padding: 5px 5px 10px 5px;
   border: 1px solid #000000;
 }
 
@@ -18,4 +19,8 @@
 
 .contact-ad-info > h6 {
   padding-right: 15px;
+}
+
+form > textarea {
+  resize: none;
 }
