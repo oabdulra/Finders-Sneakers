@@ -8,12 +8,16 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     db.getAllSneakers(req.query)
       .then(sneakers => {
+        console.log(sneakers);
         const user_id = req.session.user_id;
         if (!user_id) {
+          //console.log(sneakers);
           res.render("sneakers", {sneakers, user: null});
+          return;
         }
         db.getUserWithId(user_id)
           .then(user => {
+            //console.log(sneakers);
             res.render("sneakers", {sneakers, user});
           })
           .catch(e => res.send(e));

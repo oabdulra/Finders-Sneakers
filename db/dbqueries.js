@@ -137,7 +137,7 @@ const getAllSneakers = function(options) {
     }
   })
   .catch((err) => {
-    console.log(err.message);
+    console.log(err.message, 'getAllSneakers here');
   });
 }
 
@@ -207,13 +207,14 @@ const deleteOneSneaker = function (sneakerId) {
   RETURNING *
   `;
 
-  return db.query(queryString, [sneakerId])
+     return db.query(queryString, [sneakerId])
         .then((result) => {
           return result.rows[0];
         })
         .catch((err) => {
           console.log(err.message);
-        })
+        });
+
 
 };
 
@@ -273,7 +274,7 @@ exports.addToMyFavs = addToMyFavs;
 const getMostFavourited = function () {
 
   const queryString = `
-  SELECT favourite_ads.id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold,shoe_size.size, shoe_brands.brand_name
+  SELECT favourite_ads.id AS fave_ads, posted_ads.id AS id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold,shoe_size.size, shoe_brands.brand_name
   FROM favourite_ads
   JOIN posted_ads ON favourite_ads.item_id = posted_ads.id
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
