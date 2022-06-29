@@ -80,3 +80,11 @@
 .browse-btns {
   margin-right: 10px;
 }
+
+a {
+  text-decoration: none;
+}
+
+button:hover a {
+  color: white;
+}
