@@ -66,18 +66,18 @@
           <p class="browse-ad-desc"><%= sneaker.ad_description %> </p>
         </section>
         <footer class="browse-footer">
-          <p>Posted on: <%= sneaker.post_date %> </p>
           <button type="button" class="btn btn-outline-primary browse-btns">
             <a href="/sneakers/<%= sneaker.id %>">View Details</a>
           </button>
 
           <% if (user) { %>
-          <button type="button" class="btn btn-outline-primary browse-btns">
-            <a href="/sneakers/<%= sneaker.id %>/contact ">Contact Seller</a>
-          </button>
-          <form action="/myfavs/<%= sneaker.id %> " method="post">
-            <button type="submit" class="btn btn-outline-primary browse-btns">Add to Favourites</button>
-          </form>
+            <button type="button" class="btn btn-outline-primary browse-btns">
+              <a href="/sneakers/<%= sneaker.id %>/contact ">Contact Seller</a>
+            </button>
+            <form action="/myfavs/<%= sneaker.id %> " method="post">
+              <button type="submit" class="btn btn-outline-primary browse-btns">Add to Favourites</button>
+            </form>
+            <p>Posted on: <%= sneaker.post_date %> </p>
           <% } %>
         </footer>
       </article>
