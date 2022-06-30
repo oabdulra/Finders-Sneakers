@@ -109,7 +109,7 @@ const getAllSneakers = function(options) {
   const queryParams = [];
 
   let queryString = `
-  SELECT posted_ads.id, posted_ads.owner_id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold, shoe_size.size, shoe_brands.brand_name
+  SELECT posted_ads.id, posted_ads.owner_id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, TO_CHAR(posted_ads.post_date, 'Mon dd, yyyy') as post_date, posted_ads.ad_sold, shoe_size.size, shoe_brands.brand_name
   FROM posted_ads
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
   JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id`;
@@ -120,7 +120,7 @@ const getAllSneakers = function(options) {
   }
 
   if (options.maximum_price) {
-    queryParams.push(`${options.maximum_price * 100}`);
+    queryParams.push(`${options.maximum_price}`);
     queryString += `${queryOp(queryParams)} price <=  $${queryParams.length}`;
   }
 
@@ -146,7 +146,7 @@ exports.getAllSneakers = getAllSneakers;
 const getOneSneaker = function(sneakerId) {
 
   const queryString = `
-  SELECT posted_ads.id, posted_ads.owner_id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold, shoe_size.size, shoe_brands.brand_name
+  SELECT posted_ads.id, posted_ads.owner_id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, TO_CHAR(posted_ads.post_date, 'Mon dd, yyyy') as post_date, posted_ads.ad_sold, shoe_size.size, shoe_brands.brand_name
   FROM posted_ads
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id
   JOIN shoe_brands ON posted_ads.brand_id = shoe_brands.id
@@ -273,7 +273,7 @@ exports.addToMyFavs = addToMyFavs;
 const getMostFavourited = function () {
 
   const queryString = `
-  SELECT favourite_ads.id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold,shoe_size.size, shoe_brands.brand_name
+  SELECT favourite_ads.id AS fave_ads, posted_ads.id AS id, posted_ads.title, posted_ads.ad_photo, posted_ads.ad_description, posted_ads.price, posted_ads.post_date, posted_ads.ad_sold,shoe_size.size, shoe_brands.brand_name
   FROM favourite_ads
   JOIN posted_ads ON favourite_ads.item_id = posted_ads.id
   JOIN shoe_size ON posted_ads.size_id = shoe_size.id

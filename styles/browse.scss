@@ -43,7 +43,7 @@
 }
 
 .browse-article {
-  padding-bottom: 5px;
+  padding: 5px 5px 0 5px;
   border: 1px solid #000000;
 }
 
@@ -59,7 +59,6 @@
 .browse-ad-content {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .browse-ad-desc {
@@ -79,4 +78,12 @@
 
 .browse-btns {
   margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+button:hover a {
+  color: #FFFFFF;
 }

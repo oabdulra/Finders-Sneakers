@@ -55,7 +55,7 @@ app.get("/", (req, res) => {
     .then(sneakers => {
       const user_id = req.session.user_id;
       if (!user_id) {
-        res.render("sneakers", {sneakers, user: null});
+        return res.render("sneakers", {sneakers, user: null});
       }
       db.getUserWithId(user_id)
         .then(user => {

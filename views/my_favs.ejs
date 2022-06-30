@@ -51,11 +51,11 @@
           <p class="myfavs-ad-desc"> <%= sneaker.ad_description %>  </p>
         </section>
         <footer class="myfavs-footer">
-          <button type="button" class="btn btn-outline-primary browse-btns">
+          <button type="button" class="btn btn-outline-primary myfavs-btns">
             <a href="/sneakers/<%= sneaker.id %>/contact ">Contact Seller</a>
           </button>
           <form action="/myfavs/<%= sneaker.id %>/delete" method="post">
-            <button type="submit" class="btn btn-outline-primary mycoll-footer-btns">Delete From Favourites</button>
+            <button type="submit" class="btn btn-outline-primary myfavs-btns">Delete From Favourites</button>
           </form>
         </footer>
       </article>

@@ -34,12 +34,13 @@
   </div>
 
   <div class="filter">
-    <h5>Filter by Max Price
+    <h5>Filter by Price
       <i class="fa-solid fa-angles-down"></i>
     </h5>
-    <form action="" method="GET" class="browse-form">
-      <input type="text" name="price" placeholder="Enter max price" class="filter-input">
-      <button class="btn btn-outline-primary">Search</button>
+    <form action="/sneakers" method="GET" class="browse-form">
+      <input type="text" name="minimum_price" placeholder="Min price" class="filter-input">
+      <input type="text" name="maximum_price" placeholder="Max price" class="filter-input">
+      <button type="submit" class="btn btn-outline-primary">Search</button>
     </form>
   </div>
 
@@ -65,18 +66,18 @@
           <p class="browse-ad-desc"><%= sneaker.ad_description %> </p>
         </section>
         <footer class="browse-footer">
-          <p>Posted on: <%= sneaker.post_date %> </p>
           <button type="button" class="btn btn-outline-primary browse-btns">
             <a href="/sneakers/<%= sneaker.id %>">View Details</a>
           </button>
 
           <% if (user) { %>
-          <button type="button" class="btn btn-outline-primary browse-btns">
-            <a href="/sneakers/<%= sneaker.id %>/contact ">Contact Seller</a>
-          </button>
-          <form action="/myfavs/<%= sneaker.id %> " method="post">
-            <button type="submit" class="btn btn-outline-primary browse-btns">Add to Favourites</button>
-          </form>
+            <button type="button" class="btn btn-outline-primary browse-btns">
+              <a href="/sneakers/<%= sneaker.id %>/contact ">Contact Seller</a>
+            </button>
+            <form action="/myfavs/<%= sneaker.id %> " method="post">
+              <button type="submit" class="btn btn-outline-primary browse-btns">Add to Favourites</button>
+            </form>
+            <p>Posted on: <%= sneaker.post_date %> </p>
           <% } %>
         </footer>
       </article>

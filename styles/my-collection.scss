@@ -8,7 +8,7 @@
 }
 
 .mycoll-article {
-  padding-bottom: 15px;
+  padding: 5px 5px 10px 5px;
   border: 1px solid #000000;
 }
 
@@ -24,7 +24,6 @@
 .mycoll-ad-content {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .mycoll-ad-desc {
@@ -32,7 +31,8 @@
 }
 
 .mycoll-footer {
-  margin-left: 5px;
+  display: flex;
+  flex-direction: row;
   margin-top: 15px;
 }
 

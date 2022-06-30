@@ -24,7 +24,6 @@
 .showsneaker-ad-content {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .showsneaker-ad-desc {
@@ -41,3 +40,12 @@
 .showsneaker-btns {
   margin-right: 10px;
 }
+
+a {
+  text-decoration: none;
+}
+
+button:hover a {
+  color: #FFFFFF;
+}
+
