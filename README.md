@@ -3,7 +3,7 @@ FindersSneakers
 
 A buy/sell listing app that lets you sell your sneakers and browse sneakers available for sale. It's like Craiglist and Kijiji, but with a focus on sneakers!
 
-The creation of the app started with using the 'LHL Node Skeleton' files provided by Lighthouse Labs. The app is a collaboration project created by Gloria Cheung, Osama Abdul Rahman, and Raiza De Guzman, as a way to further practice the tech and approaches learned to date at Lighthouse Labs. The project also allowed practice in utilizing the major steps of software development such as, user stories, wireframes, ERD, Routes, etc.
+The creation of the app started with using the 'LHL Node Skeleton' files provided by Lighthouse Labs. The app is a collaboration project created by Gloria Cheung, Osama Abdul Rahman, and Raiza De Guzman, as a way to further practice the tech and approaches learned to date at Lighthouse Labs. The project also allowed practice in employing the major steps of software development such as, user stories, wireframes, ERD, Routes, etc.
 
 ## Final Product
 !["Index page if user is not logged in. Nav bar options limited. Top 5 Most Favourited sneakers appear on the page"](https://github.com/oabdulra/midterm/blob/master/docs/index-not-logged-in.png?raw=true)
