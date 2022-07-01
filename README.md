@@ -8,7 +8,7 @@ The creation of the app started with using the 'LHL Node Skeleton' files provide
 ## Final Product
 !["Index page if user is not logged in. Nav bar options limited. Top 5 Most Favourited sneakers appear on the page"](https://github.com/oabdulra/midterm/blob/master/docs/index-not-logged-in.png?raw=true)
 !["Index page if a registered user is logged in. More options in nav bar. Top 5 Most Favourited sneakers appear on the page"](https://github.com/oabdulra/midterm/blob/master/docs/index-logged-in.png?raw=true)
-!["Browse page if registered user logged in. Shows all sneakers available for sale."](https://github.com/oabdulra/midterm/blob/master/docs/browse-logged-in.png?raw=true)
+!["My Collection page only accessible if registered user is logged in. Shows user's posted ads for sneakers they want to sell."](https://github.com/oabdulra/midterm/blob/master/docs/my-collection.png?raw=true)
 !["My Favourites page only accessible if registered user is logged in. Shows all ads that have been favourited."](https://github.com/oabdulra/midterm/blob/master/docs/my-favs.png?raw=true)
 
 ## Stacks Used for Project's Development
