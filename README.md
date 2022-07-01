@@ -19,20 +19,22 @@ The app is a collaboration project created by Gloria Cheung, Osama Abdul Rahman,
 * `PostgreSQL` and `pg` (with promises) for DBMS
 * `git` for version control
 
-
 ## Getting Started
 
-1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the .env file with your correct local information 
+1. Create a database called `midterm`
+  - Create a role called `labber`
+  - Set password as `labber`
+2. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
+3. Update the .env file with your correct local information 
   - username: `labber` 
   - password: `labber` 
   - database: `midterm`
-3. Install dependencies: `npm i`
-4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Reset database: `npm run db:reset`
+4. Install dependencies: `npm i`
+5. Fix to binaries for sass: `npm rebuild node-sass`
+6. Reset database: `npm run db:reset`
   - Check the db folder to see what gets created and seeded in the SDB
-7. Run the server: `npm run local`
-8. Visit `http://localhost:8080/`
+8. Run the server: `npm run local`
+9. Visit `http://localhost:8080/`
 
 ## Warnings & Tips
 
