@@ -5,6 +5,12 @@ A buy/sell listing app that lets you sell your sneakers and browse sneakers avai
 
 The creation of the app started with using the 'LHL Node Skeleton' files provided by Lighthouse Labs. The app is a collaboration project created by Gloria Cheung, Osama Abdul Rahman, and Raiza De Guzman, as a way to further practice the tech and approaches learned to date at Lighthouse Labs. The project also allowed practice in utilizing the major steps of software development such as, user stories, wireframes, ERD, Routes, etc.
 
+## Final Product
+!["Index page if user is not logged in. Nav bar options limited. Top 5 Most Favourited sneakers appear on the page"](https://github.com/oabdulra/midterm/blob/master/docs/index-not-logged-in.png?raw=true)
+!["Index page if a registered user is logged in. More options in nav bar. Top 5 Most Favourited sneakers appear on the page"](https://github.com/oabdulra/midterm/blob/master/docs/index-logged-in.png?raw=true)
+!["Browse page if registered user logged in. Shows all sneakers available for sale."](https://github.com/oabdulra/midterm/blob/master/docs/browse-logged-in.png?raw=true)
+!["My Favourites page only accessible if registered user is logged in. Shows all ads that have been favourited."](https://github.com/oabdulra/midterm/blob/master/docs/my-favs.png?raw=true)
+
 ## Stacks Used for Project's Development
 
 * ES6 for server-side (`NodeJS`) code
